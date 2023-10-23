@@ -1,6 +1,11 @@
+
+
+
+
+
 body {
     max-width: 1440px;
-    background-color: var(--lightgrey-color);
+    background-color:lightgrey;
     font-family: 'Anton', sans-serif;
     margin: auto;
   }
@@ -16,7 +21,7 @@ header {
   }
   header input {
     width: 100%;
-    height: 5rem;
+  
     border-radius: 1rem;
     padding: 2rem;
     margin: auto;
@@ -26,9 +31,10 @@ header {
   }
   .search {
     position: relative;
-    margin: auto;
-    max-width: 55rem;
-    height: 5rem;
+    display :flex;
+    left:243px;
+    width: 954px;
+    height: 72px;
   }
   
   .search img {
@@ -41,11 +47,352 @@ header {
   }
   header h1 {
     color: #ffd15b;
-    font-size: 44px;
-    font-weight: 400;
-    width: 49%;
-    margin: auto;
+    font-size: 41px;
+    font-weight: 700;
+    width: 950px;
+    height:152px;
+   margin:auto;
+  text-align: center;
+  line-height: 66.24px;
+ font-family:'Anton';
+ text-transform: uppercase;
+
+
+  
+  }
+  .filtres {
+    display: flex;
+    flex-direction: column;
+    margin-left: 90px;
+  }
+  
+  .filtre_selection {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+  }
+  
+  .filtre_resultat {
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: .5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .filtre_element_ustensils {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 0 0 .5rem;
+    padding: .5rem .5rem .5rem .5rem;
+    background-color: #FFD15B;
+    border-radius: .5rem;
+  }
+  
+  .filtre_element_ingredients {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 0 0 .5rem;
+    padding: .5rem .5rem .5rem .5rem;
+    background-color:#FFD15B ;
+    border-radius: .5rem;
+  }
+  
+  .filtre_element_appareils {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 0 0 .5rem;
+    padding: .5rem .5rem .5rem .5rem;
+    background-color:#FFD15B ;
+    border-radius: .5rem;
+  }
+  
+  .filtre_element_text {
+    font-size: .9rem;
+    font-family: 'Manrope', sans-serif;
+    margin-right: .5rem;
+  }
+  
+  .xmark {
+    margin-left: .5rem;
+    cursor: pointer;
+  }
+  
+  .not_found {
+    font-size: .9rem;
+    font-weight: 600;
+    font-family: 'Manrope', sans-serif;
+  }
+  
+  .selections {
+    display: flex;
+    gap: 2rem;
+    width: 34rem;
+  }
+  
+  .ingredients {
+    position: relative;
+    width: 10rem;
+  }
+  
+  .appareils {
+    position: relative;
+    width: 10rem;
+  }
+  
+  .ustensils {
+    position: relative;
+    width: 10rem;
+  }
+  
+  .chevron_down_ingredients {
+    position: absolute;
+    right: .6rem;
+    top: 1rem;
+  }
+  
+  .chevron_down_appareils {
+    position: absolute;
+    right: .6rem;
+    top: 1rem;
+  }
+  
+  .chevron_down_ustensils {
+    position: absolute;
+    right: .6rem;
+    top: 1rem;
+  }
+  
+  .chevron_up_ingredients {
+    display: none;
+    position: absolute;
+    right: .6rem;
+    top: 1rem;
+  }
+  
+  .chevron_up_appareils {
+    display: none;
+    position: absolute;
+    right: .6rem;
+    top: 1rem;
+  }
+  
+  .chevron_up_ustensils {
+    display: none;
+    position: absolute;
+    right: .6rem;
+    top: 1rem;
+  }
+  
+  .dropdown_btn {
+    width: 10rem;
+    height: 3rem;
+    text-align: left;
+    padding-inline: 1rem;
+    border-radius: .5rem;
+    border-style: none;
+    background-color: white;
+    cursor: pointer;
+  }
+  
+  .filtre_ingredients {
+    display: none;
+    font-family: 'Manrope', sans-serif;
+    font-size: .85rem;
+    width: 10rem;
+    position: absolute;
+    background-color: white;
+    padding-top: .2rem;
+    border-radius: .5rem;
+    top: 2rem;
+    z-index: 2;
+  }
+  
+  .filtre_ingredients p {
+    margin: 0 0 .3rem .6rem;
+  }
+  
+  .filtre_ingredients p:hover {
+    background-color: #FFD15B;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  
+  .container_ingredients {
+    height: 16rem;
+    overflow-y: auto;
+  }
+  
+  .filtre_appareils {
+    display: none;
+    font-family: 'Manrope', sans-serif;
+    font-size: .85rem;
+    width: 10rem;
+    position: absolute;
+    background-color: white;
+    padding-top: .2rem;
+    border-radius: .5rem;
+    top: 2rem;
+    z-index: 2;
+  }
+  
+  .filtre_appareils p {
+    margin: 0 0 .3rem .6rem;
+  }
+  
+  .filtre_appareils p:hover {
+    background-color: #FFD15B;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  
+  .container_appareils {
+    height: 16rem;
+    overflow-y: auto;
+  }
+  
+  .filtre_ustensils {
+    display: none;
+    font-family: 'Manrope', sans-serif;
+    font-size: .85rem;
+    width: 10rem;
+    position: absolute;
+    background-color: white ;
+    padding-top: .2rem;
+    border-radius: .5rem;
+    top: 2rem;
+    z-index: 2;
+  }
+  
+  .filtre_ustensils p {
+    margin: 0 0 .3rem .6rem;
+  }
+  
+  .filtre_ustensils p:hover {
+    background-color: #FFD15B;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  
+  .container_ustensils {
+    height: 16rem;
+    overflow-y: auto;
+  }
+  
+  #ingredients_search {
+    display: block;
+    width: 9rem;
+    height: 2rem;
+    margin: 1rem auto 1rem auto;
+    border: .15rem #7A7A7A solid;
+    border-radius: .2rem;
+  }
+  
+  #appareils_search {
+    display: block;
+    width: 9rem;
+    height: 2rem;
+    margin: 1rem auto 1rem auto;
+    border: .15rem #7A7A7A solid;
+    border-radius: .2rem;
+  }
+  
+  #ustensils_search {
+    display: block;
+    width: 9rem;
+    height: 2rem;
+    margin: 1rem auto 1rem auto;
+    border: .15rem  #7A7A7A solid;
+    border-radius: .2rem;
+  }
+  
+  .magnifying_glass {
+    position: relative;
+    top: -2.7rem;
+    left: 8rem;
+    opacity: .3;
+  }
+  
+  .recipe-card {
+    position: relative;
+    width: 380px;
+    height: 760px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 25px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    transform: scale(1);
+    transition: all 0.3s;
+  }
+  .recipe-card:hover {
+    cursor: pointer;
+    transform: scale(1.03);
+  }
+  .recipe-time {
+    position: absolute;
+    right: 0;
+    top: 0;
+    background-color: #FFD15B;
+    border-radius: 25px;
+    padding: 5px 20px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    margin: 20px;
+    font-size: 13px;
+  }
+  .recipe-image {
+    width: 100%;
+    height: 250px;
+    -o-object-fit: cover;
+       object-fit: cover;
+  }
+  .recipe-section {
+    padding: 20px;
+  }
+  .recipe-section h2 {
+    font-weight: 600;
+    font-size: 20px;
+  }
+  .recipe-section h3 {
+    color: #7A7A7A;
+    font-weight: 500;
+    font-size: 15px;
     text-transform: uppercase;
- 
-    text-align: center;
+    margin: 20px 0;
+  }
+  .recipe-description {
+    height: 76px;
+    font-weight: 400;
+    font-size: 14px;
+    overflow: hidden;
+  }
+  .recipe-titleIngredients {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  .recipe-ingredient {
+    display: flex;
+    flex-direction: column;
+  }
+  .recipe-ingredient h4 {
+    font-weight: 600;
+    font-size: 15px;
+  }
+  .recipe-ingredient span {
+    color: #7A7A7A;
+    font-weight: 400;
+    font-size: 15px;
+    margin-top: 5px;
+  }
+  .listeRecettes {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap:57px;
+    margin-top: 50px;
+    
   }
