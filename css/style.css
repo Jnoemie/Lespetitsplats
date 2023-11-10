@@ -318,7 +318,7 @@ header {
   .recipe-card {
     position: relative;
     width: 380px;
-    height: 760px;
+    height: 770px;
     overflow: hidden;
     display: flex;
     flex-direction: column;
