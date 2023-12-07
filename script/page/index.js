@@ -11,8 +11,8 @@ async function renderRecipes(dataRecette){
 function getSearchParams(){
     let search_query = document.getElementById('field_search').value;
     let search_ingredients = document.getElementById('ingredients_search').value; 
-    let search_appareil = document.getElementById('appareil_search').value; 
-    let search_ustensil = document.getElementById('ustensil_search').value; 
+    let search_appareil = document.getElementById('appareils_search').value; 
+    let search_ustensil = document.getElementById('ustensils_search').value; 
     return {
         search_query: search_query,
         search_filters: {
@@ -29,7 +29,7 @@ function searchRecipesClassic(recipes, searchParams) {
         let ingredientMatch = true, appareilMatch = true, ustensilMatch = true;
 
         // Vérifier si les filtres sont définis et, le cas échéant, si la recette correspond au filtre
-        if (searchParams.search_filters.ingredients && !recipe.ingredients.some(ingredient => ingredient.toLowerCase().includes(searchParams.search_filters.ingredients.toLowerCase()))) {
+        if (searchParams.search_filters.ingredients && !recipe.ingredients.some(ingredient => ingredient.ingredient.toLowerCase().includes(searchParams.search_filters.ingredients.toLowerCase()))) {
             ingredientMatch = false;
         }
 
@@ -44,7 +44,7 @@ function searchRecipesClassic(recipes, searchParams) {
         // Vérifier si la recette correspond à la requête de recherche (dans le nom, la description ou les ingrédients)
         let queryMatch = recipe.name.toLowerCase().includes(searchParams.search_query.toLowerCase()) ||
                          recipe.description.toLowerCase().includes(searchParams.search_query.toLowerCase()) ||
-                         recipe.ingredients.some(ingredient => ingredient.toLowerCase().includes(searchParams.search_query.toLowerCase()));
+                         recipe.ingredients.some(ingredient=> ingredient.ingredient.toLowerCase().includes(searchParams.search_query.toLowerCase()));
 
         // Si la recette correspond à la fois à la requête de recherche et à tous les filtres, l'ajouter aux résultats
         if (queryMatch && ingredientMatch && appareilMatch && ustensilMatch) {
