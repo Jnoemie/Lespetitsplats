@@ -79,6 +79,22 @@ header {
     margin-bottom: 1rem;
   }
   
+.search_list_criterias {
+  list-style-type: none;  
+  padding: 0;
+  margin: 0;
+}
+
+.search_list_criterias li {
+  list-style-type: none;
+  padding: 4px 8px;
+  margin: 0;
+}
+
+.search_list_criterias li:hover {
+  background-color: lightskyblue;
+}
+
   .filtre_element_ustensils {
     display: flex;
     justify-content: space-between;
