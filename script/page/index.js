@@ -1,6 +1,11 @@
 async function renderRecipes(dataRecette){
     const recetteSection = document.getElementById ("section");
+    // Clear the recipe list
     document.querySelector(".listeRecettes").innerHTML="";
+    // Clear the dropdown lists (x3)
+    document.getElementById('container_ingredients').innerHTML = ""
+    // document.getElementById('container_ingredients').innerHTML = ""
+    // document.getElementById('container_ingredients').innerHTML = ""
 
     let ingredients = []
     let ustensils =[]
@@ -40,21 +45,20 @@ async function renderRecipes(dataRecette){
                 document.getElementById('container_ustensils').appendChild(li)
             }
         })
-        recipe.appliance.forEach(appareil => {
-            if (!appliance.includes(appareil)) {
-                appliance.push(appareil)
-                li = document.createElement('LI')
-                check = document.createElement('INPUT')
-                check.type = 'checkbox'
-                check.value = appareil
-                check.classList.add('checkbox_appareils')
-                li.appendChild(check)
-                span = document.createElement('SPAN')
-                span.innerHTML = appareil
-                li.appendChild(span)
-                document.getElementById('container_appareils').appendChild(li)
-            }
-        })
+        // recipe.appliance is not a list
+        if (recipe.appliance != '' && !appliance.includes(recipe.appliance)) {        
+            appliance.push(recipe.appliance)
+            li = document.createElement('LI')
+            check = document.createElement('INPUT')
+            check.type = 'checkbox'
+            check.value = recipe.appliance
+            check.classList.add('checkbox_appareils')
+            li.appendChild(check)
+            span = document.createElement('SPAN')
+            span.innerHTML = recipe.appliance
+            li.appendChild(span)
+            document.getElementById('container_appareils').appendChild(li)            
+        }
 
     });
 }
@@ -99,13 +103,14 @@ function searchRecipesClassic(recipes, searchParams) {
             ingredientMatch = false;
         }
 
-        if (searchParams.search_filters.appareil && !recipe.appareil.toLowerCase().includes(searchParams.search_filters.appareil.toLowerCase())) {
+        // @TODO
+        /* if (searchParams.search_filters.appareil && !recipe.appareil.toLowerCase().includes(searchParams.search_filters.appareil.toLowerCase())) {
             appareilMatch = false;
         }
 
         if (searchParams.search_filters.ustensil && !recipe.ustensils.some(ustensil => ustensil.toLowerCase().includes(searchParams.search_filters.ustensil.toLowerCase()))) {
             ustensilMatch = false;
-        }
+        } */
 
         // Vérifier si la recette correspond à la requête de recherche (dans le nom, la description ou les ingrédients)
         let queryMatch = recipe.name.toLowerCase().includes(searchParams.search_query.toLowerCase()) ||
@@ -131,14 +136,10 @@ function initEvents() {
     });
 
     document.querySelectorAll('.dropdown_btn').forEach(elt => elt.addEventListener('click', function(event) {
-        console.log(event.target)
-        console.log(event.target.classList)
         let type = 'ingredients'
         if (event.target.classList.contains('btn_appareils')) type = 'appareils'
-        if (event.target.classList.contains('btn_ustensils')) type = 'ustensils'        
-        console.log(type)
-    console.log(document.getElementById('filtre_' + type).style.display)
-        if (document.getElementById('filtre_' + type).style.display == 'none') {
+        if (event.target.classList.contains('btn_ustensils')) type = 'ustensils'            
+        if (document.getElementById('filtre_' + type).style.display == 'none' || document.getElementById('filtre_' + type).style.display == '') {
             // element is hidden, show it
             document.getElementById('filtre_' + type).style.display = 'block';
             document.getElementById(type + '_down').style.display = 'none';
