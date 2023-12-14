@@ -25,36 +25,36 @@ async function renderRecipes(dataRecette){
                 document.getElementById('container_ingredients').appendChild(li)
             }
         })
-        recipe.ustensils.forEach(ust => {
-            if (!ustensils.includes(ust.ustensils)) {
-                ustensils.push(ust.ustensils)
+        recipe.ustensils.forEach(ustensil => {
+            if (!ustensils.includes(ustensil)) {
+                ustensils.push(ustensil)
                 li = document.createElement('LI')
                 check = document.createElement('INPUT')
                 check.type = 'checkbox'
-                check.value = ust.ingredient
+                check.value = ustensil
                 check.classList.add('checkbox_ustensils')
                 li.appendChild(check)
                 span = document.createElement('SPAN')
-                span.innerHTML = ust.ingredient
+                span.innerHTML = ustensil
                 li.appendChild(span)
                 document.getElementById('container_ustensils').appendChild(li)
             }
         })
-        /*recipe.appliance.forEach(appl => {
-            if (!appliance.includes(appl.aplliance)) {
-                appliance.push(appl.aplliance)
+        recipe.appliance.forEach(appareil => {
+            if (!appliance.includes(appareil)) {
+                appliance.push(appareil)
                 li = document.createElement('LI')
                 check = document.createElement('INPUT')
                 check.type = 'checkbox'
-                check.value = appl.ingredient
+                check.value = appareil
                 check.classList.add('checkbox_appareils')
                 li.appendChild(check)
                 span = document.createElement('SPAN')
-                span.innerHTML = appl.ingredient
+                span.innerHTML = appareil
                 li.appendChild(span)
                 document.getElementById('container_appareils').appendChild(li)
             }
-        })*/
+        })
 
     });
 }
@@ -66,7 +66,7 @@ function getSearchParams(){
     })
     console.log(search_ingredients)
     let search_ustensil =[]
-        selected_ustensils = document.querySelectorAll('.checkbox_ustensils').forEach(check => {
+        selected_ustensil = document.querySelectorAll('.checkbox_ustensils').forEach(check => {
         if (check.checked) search_ustensil.push(check.value.toLowerCase())
     })
 console.log(search_ustensil)
