@@ -3,6 +3,8 @@ async function renderRecipes(dataRecette){
     document.querySelector(".listeRecettes").innerHTML="";
 
     let ingredients = []
+    let ustensils =[]
+    let appliance =[]
 
     dataRecette.forEach((recipe) => {
         const modelRecette = recetteFactory(recipe);
@@ -23,6 +25,36 @@ async function renderRecipes(dataRecette){
                 document.getElementById('container_ingredients').appendChild(li)
             }
         })
+        recipe.ustensils.forEach(ust => {
+            if (!ustensils.includes(ust.ustensils)) {
+                ustensils.push(ust.ustensils)
+                li = document.createElement('LI')
+                check = document.createElement('INPUT')
+                check.type = 'checkbox'
+                check.value = ust.ingredient
+                check.classList.add('checkbox_ustensils')
+                li.appendChild(check)
+                span = document.createElement('SPAN')
+                span.innerHTML = ust.ingredient
+                li.appendChild(span)
+                document.getElementById('container_ustensils').appendChild(li)
+            }
+        })
+        /*recipe.appliance.forEach(appl => {
+            if (!appliance.includes(appl.aplliance)) {
+                appliance.push(appl.aplliance)
+                li = document.createElement('LI')
+                check = document.createElement('INPUT')
+                check.type = 'checkbox'
+                check.value = appl.ingredient
+                check.classList.add('checkbox_appareils')
+                li.appendChild(check)
+                span = document.createElement('SPAN')
+                span.innerHTML = appl.ingredient
+                li.appendChild(span)
+                document.getElementById('container_appareils').appendChild(li)
+            }
+        })*/
 
     });
 }
@@ -33,9 +65,19 @@ function getSearchParams(){
         if (check.checked) search_ingredients.push(check.value.toLowerCase())
     })
     console.log(search_ingredients)
+    let search_ustensil =[]
+        selected_ustensils = document.querySelectorAll('.checkbox_ustensils').forEach(check => {
+        if (check.checked) search_ustensil.push(check.value.toLowerCase())
+    })
+console.log(search_ustensil)
+let search_appareil =[]
+        selected_appareil = document.querySelectorAll('.checkbox_appareils').forEach(check => {
+        if (check.checked) search_appareil.push(check.value.toLowerCase())
+    })
+
     // let search_ingredients = document.getElementById('ingredients_search').value; 
-    let search_appareil = document.getElementById('appareils_search').value; 
-    let search_ustensil = document.getElementById('ustensils_search').value; 
+    //let search_appareil = document.getElementById('appareils_search').value; 
+    //let search_ustensil = document.getElementById('ustensils_search').value; 
     return {
         search_query: search_query,
         search_filters: {
