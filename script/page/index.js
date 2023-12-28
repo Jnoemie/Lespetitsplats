@@ -3,9 +3,9 @@ async function renderRecipes(dataRecette){
     // Clear the recipe list
     document.querySelector(".listeRecettes").innerHTML="";
     // Clear the dropdown lists (x3)
-    document.getElementById('container_ingredients').innerHTML = ""
-    // document.getElementById('container_ingredients').innerHTML = ""
-    // document.getElementById('container_ingredients').innerHTML = ""
+    document.getElementById('container_ingredients').innerHTML = "";
+    document.getElementById('container_ustensils').innerHTML = "";
+    document.getElementById('container_appareils').innerHTML = "";
 
     let ingredients = []
     let ustensils =[]
@@ -78,7 +78,7 @@ let search_appareil =[]
         selected_appareil = document.querySelectorAll('.checkbox_appareils').forEach(check => {
         if (check.checked) search_appareil.push(check.value.toLowerCase())
     })
-
+console.log(search_appareil)
     // let search_ingredients = document.getElementById('ingredients_search').value; 
     //let search_appareil = document.getElementById('appareils_search').value; 
     //let search_ustensil = document.getElementById('ustensils_search').value; 
@@ -93,35 +93,49 @@ let search_appareil =[]
 }
 function searchRecipesClassic(recipes, searchParams) {
     let results = [];
+
     for (let i = 0; i < recipes.length; i++) {
         const recipe = recipes[i];
-        let ingredientMatch = true, appareilMatch = true, ustensilMatch = true;
-        console.log(recipe.ingredients)
+        let ingredientMatch = true;
+        let appareilMatch = true;
+        let ustensilMatch = true;
+
         // Vérifier si les filtres sont définis et, le cas échéant, si la recette correspond au filtre
-        recipe_ingredient_list = recipe.ingredients.map(elt => elt.ingredient.toLowerCase())
-        if (searchParams.search_filters.ingredients && !searchParams.search_filters.ingredients.every(ingredient => recipe_ingredient_list.includes(ingredient))) {
-            ingredientMatch = false;
+        for (let j = 0; j < searchParams.search_filters.ingredients.length; j++) {
+            const ingredient = searchParams.search_filters.ingredients[j].toLowerCase();
+            const recipeIngredients = recipe.ingredients.map(elt => elt.ingredient.toLowerCase());
+
+            if (!recipeIngredients.includes(ingredient)) {
+                ingredientMatch = false;
+                break;
+            }
         }
 
-        // @TODO
-        /* if (searchParams.search_filters.appareil && !recipe.appareil.toLowerCase().includes(searchParams.search_filters.appareil.toLowerCase())) {
-            appareilMatch = false;
-        }
+       // if (searchParams.search_filters.appareil) {
+         //   const appareil = searchParams.search_filters.appareil.toLowerCase();
+           // if (!recipe.appliance.toLowerCase().includes(appareil)) {
+              //  appareilMatch = false;
+          //  }
+        //}
 
-        if (searchParams.search_filters.ustensil && !recipe.ustensils.some(ustensil => ustensil.toLowerCase().includes(searchParams.search_filters.ustensil.toLowerCase()))) {
-            ustensilMatch = false;
-        } */
+        //if (searchParams.search_filters.ustensil) {
+          //  const ustensil = searchParams.search_filters.ustensil.toLowerCase();
+            //if (!recipe.ustensils.some(ust => ust.toLowerCase().includes(ustensil))) {
+            //    ustensilMatch = false;
+            //}
+        //}
 
         // Vérifier si la recette correspond à la requête de recherche (dans le nom, la description ou les ingrédients)
-        let queryMatch = recipe.name.toLowerCase().includes(searchParams.search_query.toLowerCase()) ||
-                         recipe.description.toLowerCase().includes(searchParams.search_query.toLowerCase()) ||
-                         recipe.ingredients.some(ingredient=> ingredient.ingredient.toLowerCase().includes(searchParams.search_query.toLowerCase()));
+        const queryMatch = recipe.name.toLowerCase().includes(searchParams.search_query.toLowerCase()) ||
+                           recipe.description.toLowerCase().includes(searchParams.search_query.toLowerCase()) ||
+                           recipe.ingredients.some(ingredient => ingredient.ingredient.toLowerCase().includes(searchParams.search_query.toLowerCase()));
 
         // Si la recette correspond à la fois à la requête de recherche et à tous les filtres, l'ajouter aux résultats
         if (queryMatch && ingredientMatch && appareilMatch && ustensilMatch) {
             results.push(recipe);
         }
     }
+
     return results;
 }
 function searchRecipes(recipes) {
@@ -155,6 +169,6 @@ function initEvents() {
 }
 async function init(){
     renderRecipes(recipes);
-    initEvents();
+    initEvents(); 
 }
 init();
