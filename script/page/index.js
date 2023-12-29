@@ -17,17 +17,13 @@ async function renderRecipes(dataRecette){
         recetteSection.appendChild(recetteCardDom)
         recipe.ingredients.forEach(ingr => {
             if (!ingredients.includes(ingr.ingredient)) {
-                ingredients.push(ingr.ingredient)
-                li = document.createElement('LI')
-                check = document.createElement('INPUT')
-                check.type = 'checkbox'
-                check.value = ingr.ingredient
-                check.classList.add('checkbox_ingredient')
-                li.appendChild(check)
-                span = document.createElement('SPAN')
-                span.innerHTML = ingr.ingredient
-                li.appendChild(span)
-                document.getElementById('container_ingredients').appendChild(li)
+            
+                ingredients.push(ingr.ingredient);
+                const option = document.createElement('LI');
+                option.value = ingr.ingredient;
+                option.textContent = ingr.ingredient;
+                document.getElementById('container_ingredients').appendChild(option);
+                
             }
         })
         recipe.ustensils.forEach(ustensil => {
@@ -65,10 +61,10 @@ async function renderRecipes(dataRecette){
 function getSearchParams(){
     let search_query = document.getElementById('field_search').value;
     let search_ingredients = []
-    selected_ingredients = document.querySelectorAll('.checkbox_ingredient').forEach(check => {
+    /*selected_ingredients = document.querySelectorAll('.checkbox_ingredient').forEach(check => {
         if (check.checked) search_ingredients.push(check.value.toLowerCase())
     })
-    console.log(search_ingredients)
+    console.log(search_ingredients)*/
     let search_ustensil =[]
         selected_ustensil = document.querySelectorAll('.checkbox_ustensils').forEach(check => {
         if (check.checked) search_ustensil.push(check.value.toLowerCase())
@@ -145,8 +141,11 @@ function searchRecipes(recipes) {
 }
 
 function initEvents() {
-    document.getElementById('search_button').addEventListener('click', function(event) {        
-        searchRecipes(recipes);
+    document.getElementById('field_search').addEventListener('input', function(event) {
+        if (event.target.value.length >= 3) {
+            searchRecipes(recipes);
+        }
+
     });
 
     document.querySelectorAll('.dropdown_btn').forEach(elt => elt.addEventListener('click', function(event) {
