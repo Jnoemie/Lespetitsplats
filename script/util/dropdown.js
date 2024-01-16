@@ -15,3 +15,10 @@ function toggleDropdown(type) {
       upArrowElement.style.display = "none";
     }
   }
+   // Attachez cette fonction aux éléments .dropdown_btn
+   document.querySelectorAll(".dropdown_btn").forEach((elt) => elt.addEventListener("click", function (event) {
+    let type = "ingredients";
+    if (event.target.classList.contains("btn_appareils")) type = "appareils";
+    if (event.target.classList.contains("btn_ustensils")) type = "ustensils";
+    toggleDropdown(type);
+  }));

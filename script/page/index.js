@@ -3,11 +3,11 @@ let search_ustensil = [];
 let search_appareil = [];
 
 const ingredientSearchInput = document.getElementById("ingredients_search");
-  const ustensilSearchInput = document.getElementById("ustensils_search");
-  const appareilSearchInput = document.getElementById("appareils_search");
+const ustensilSearchInput = document.getElementById("ustensils_search");
+const appareilSearchInput = document.getElementById("appareils_search");
 
-
-//fonction affichage de liste de filtres
+  
+   //fonction affichage de liste de filtres
 async function renderRecipes(dataRecette) {
   const recetteSection = document.getElementById("section");
   // nettoie la liste de recherche
@@ -16,48 +16,22 @@ async function renderRecipes(dataRecette) {
   document.getElementById("container_ingredients").innerHTML = "";
   document.getElementById("container_ustensils").innerHTML = "";
   document.getElementById("container_appareils").innerHTML = "";
+ // Traite les appareils
+ renderAppareils(dataRecette);
 
-  let ingredients = [];
-  let ustensils = [];
-  let appliance = [];
+ // Traite les ustensiles
+ renderUstensiles(dataRecette);
 
-  dataRecette.forEach((recipe) => {
-    const modelRecette = recetteFactory(recipe);
-    const recetteCardDom = modelRecette.getFicheRecette();
-    recetteSection.appendChild(recetteCardDom);
+ // Traite les ingrédients
+ renderIngredients(dataRecette);
 
-    //ingredients
-    recipe.ingredients.forEach((ingr) => {
-      if (!ingredients.includes(ingr.ingredient)) {
-        ingredients.push(ingr.ingredient);
-        const li = document.createElement("LI");
-        li.classList.add("ingredients_item");
-        li.textContent = ingr.ingredient;
-        document.getElementById("container_ingredients").appendChild(li);
-      }
-    });
-    // ustensils
-    recipe.ustensils.forEach((ustensil) => {
-      if (!ustensils.includes(ustensil)) {
-        ustensils.push(ustensil);
-        const li = document.createElement("LI");
-        li.classList.add("ustensil_item");
-        li.textContent = ustensil;
-        document.getElementById("container_ustensils").appendChild(li);
-      }
-    });
+ dataRecette.forEach((recipe) => {
+   const modelRecette = recetteFactory(recipe);
+   const recetteCardDom = modelRecette.getFicheRecette();
+   recetteSection.appendChild(recetteCardDom);
+ });
+
   
-    // appareils
-
-    if (recipe.appliance != "" && !appliance.includes(recipe.appliance)) {
-      appliance.push(recipe.appliance);
-      const li = document.createElement("LI");
-      li.classList.add("appareils_item");
-      li.textContent = recipe.appliance;
-      document.getElementById("container_appareils").appendChild(li);
-    }
-  });
-
   updateRecipeCount();
   
 }
@@ -177,200 +151,37 @@ function initEvents() {
         renderRecipes(recipes);
       }
     });
+ initializeFiltering(ingredientSearchInput, ustensilSearchInput, appareilSearchInput);
 
-    function toggleDropdown(type) {
-      const filterElement = document.getElementById("filtre_" + type);
-      const downArrowElement = document.getElementById(type + "_down");
-      const upArrowElement = document.getElementById(type + "_up");
-    
-      if (filterElement.style.display === "none" || filterElement.style.display === "") {
-        // L'élément est caché, le montrer
-        filterElement.style.display = "block";
-        downArrowElement.style.display = "none";
-        upArrowElement.style.display = "block";
-      } else {
-        // L'élément est visible, le cacher
-        filterElement.style.display = "none";
-        downArrowElement.style.display = "block";
-        upArrowElement.style.display = "none";
-      }
-    }
-    
-    // Attachez cette fonction aux éléments .dropdown_btn
-    document.querySelectorAll(".dropdown_btn").forEach((elt) => elt.addEventListener("click", function (event) {
-      let type = "ingredients";
-      if (event.target.classList.contains("btn_appareils")) type = "appareils";
-      if (event.target.classList.contains("btn_ustensils")) type = "ustensils";
-      toggleDropdown(type);
-    }));
   
-  initializeFiltering(ingredientSearchInput, ustensilSearchInput, appareilSearchInput);
+// Utilisation de la fonction pour traiter les clics d'appareils
+const listAppareils = document.querySelectorAll(".appareils_item");
 
-  //////////// Ustensil ///////
-  const listUstensils = document.querySelectorAll(".ustensil_item");
-
-  listUstensils.forEach((e) => {
-    e.addEventListener("click", (event) => {
-      const ustensil = event.target.innerText;
-
-      // Vérifiez si le tag existe déjà dans le conteneur de tags
-      const tagContainer = document.getElementById("tags_container"); // Remplacez "tags_container" par l'ID de votre conteneur de tags
-      const existingTags = tagContainer.querySelectorAll(".tag");
-
-      for (const existingTag of existingTags) {
-        if (existingTag.textContent === ustensil) {
-          // Le tag existe déjà, ne créez pas de nouveau tag
-          return;
-        }
-      }
-
-      // Créez un élément de tag
-      const tag = document.createElement("div");
-      tag.classList.add("tag"); // Ajoutez des classes CSS au tag si nécessaire
-
-
-
-      // Texte du tag
-      const tagText = document.createElement("span");
-      tagText.textContent = ustensil;
-      tag.appendChild(tagText);
-
-      // Bouton de suppression du tag
-      const deleteButton = document.createElement("button");
-      deleteButton.textContent = "X";
-      deleteButton.addEventListener("click", () => {
-        // Supprimer le tag du DOM
-        tagContainer.removeChild(tag);
-        // Supprimer l'ustensil du tableau search_ustensil
-        const index = search_ustensil.indexOf(ustensil);
-        if (index !== -1) {
-          search_ustensil.splice(index, 1);
-        }
-        // Appelez votre fonction pour gérer les paramètres de recherche
-        getSearchParams();
-      });
-      tag.appendChild(deleteButton);
-
-      // Ajoutez le tag à votre conteneur de tags
-      tagContainer.appendChild(tag);
-
-      // Ajoutez l'ustensil à votre tableau search_ustensil si nécessaire
-      search_ustensil.push(ustensil);
-
-      // Appelez votre fonction pour gérer les paramètres de recherche
-      getSearchParams();
-    });
+listAppareils.forEach((e) => {
+  e.addEventListener("click", (event) => {
+    const appareils = event.target.innerText;
+    handleAppareilClick(appareils);
   });
+});
 
+// Utilisation de la fonction pour traiter les clics d'ustensiles
+const listUstensils = document.querySelectorAll(".ustensil_item");
 
-
-  const listAppareils = document.querySelectorAll(".appareils_item");
-
-  listAppareils.forEach((e) => {
-    e.addEventListener("click", (event) => {
-      const appareils = event.target.innerText;
-
-      // Vérifiez si le tag existe déjà dans le conteneur de tags
-      const tagContainer = document.getElementById("tags_container"); // Remplacez "tags_container" par l'ID de votre conteneur de tags
-      const existingTags = tagContainer.querySelectorAll(".tag");
-
-      for (const existingTag of existingTags) {
-        if (existingTag.textContent === appareils) {
-          // Le tag existe déjà, ne créez pas de nouveau tag
-          return;
-        }
-      }
-
-      // Créez un élément de tag
-      const tag = document.createElement("div");
-      tag.classList.add("tag"); // Ajoutez des classes CSS au tag si nécessaire
-
-
-
-      // Texte du tag
-      const tagText = document.createElement("span");
-      tagText.textContent = appareils;
-      tag.appendChild(tagText);
-
-      // Bouton de suppression du tag
-      const deleteButton = document.createElement("button");
-      deleteButton.textContent = "X";
-      deleteButton.addEventListener("click", () => {
-        // Supprimer le tag du DOM
-        tagContainer.removeChild(tag);
-        // Supprimer l'ustensil du tableau search_ustensil
-        const index = search_appareil.indexOf(appareils);
-        if (index !== -1) {
-          search_appareil.splice(index, 1);
-        }
-        // Appelez votre fonction pour gérer les paramètres de recherche
-        getSearchParams();
-      });
-      tag.appendChild(deleteButton);
-
-      // Ajoutez le tag à votre conteneur de tags
-      tagContainer.appendChild(tag);
-
-      // Ajoutez l'ustensil à votre tableau search_ustensil si nécessaire
-      search_appareil.push(appareils);
-
-      // Appelez votre fonction pour gérer les paramètres de recherche
-      getSearchParams();
-    });
+listUstensils.forEach((e) => {
+  e.addEventListener("click", (event) => {
+    const ustensil = event.target.innerText;
+    handleUstensilClick(ustensil);
   });
-  //// ingredient ////////
+});
+
+ 
+  // Utilisation de la fonction pour traiter les clics d'ingrédients
   const listIngredients = document.querySelectorAll(".ingredients_item");
-
+  
   listIngredients.forEach((e) => {
     e.addEventListener("click", (event) => {
       const ingredients = event.target.innerText;
-
-      // Vérifiez si le tag existe déjà dans le conteneur de tags
-      const tagContainer = document.getElementById("tags_container"); // Remplacez "tags_container" par l'ID de votre conteneur de tags
-      const existingTags = tagContainer.querySelectorAll(".tag");
-
-      for (const existingTag of existingTags) {
-        if (existingTag.textContent === ingredients) {
-          // Le tag existe déjà, ne créez pas de nouveau tag
-          return;
-        }
-      }
-
-      // Créez un élément de tag
-      const tag = document.createElement("div");
-      tag.classList.add("tag"); // Ajoutez des classes CSS au tag si nécessaire
-
-
-
-      // Texte du tag
-      const tagText = document.createElement("span");
-      tagText.textContent = ingredients;
-      tag.appendChild(tagText);
-
-      // Bouton de suppression du tag
-      const deleteButton = document.createElement("button");
-      deleteButton.textContent = "X";
-      deleteButton.addEventListener("click", () => {
-        // Supprimer le tag du DOM
-        tagContainer.removeChild(tag);
-        // Supprimer l'ustensil du tableau search_ustensil
-        const index = search_ingredients.indexOf(ingredients);
-        if (index !== -1) {
-          search_ingredients.splice(index, 1);
-        }
-        // Appelez votre fonction pour gérer les paramètres de recherche
-        getSearchParams();
-      });
-      tag.appendChild(deleteButton);
-
-      // Ajoutez le tag à votre conteneur de tags
-      tagContainer.appendChild(tag);
-
-      // Ajoutez l'ustensil à votre tableau search_ustensil si nécessaire
-      search_ingredients.push(ingredients);
-
-      // Appelez votre fonction pour gérer les paramètres de recherche
-      getSearchParams();
+      handleIngredientClick(ingredients);
     });
   });
 
