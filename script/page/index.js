@@ -135,6 +135,7 @@ function searchRecipesClassic(recipes) {
 function searchRecipes(recipes) {
   
   let results = searchRecipesClassic(recipes);
+ 
   renderRecipes(results);
 }
 
