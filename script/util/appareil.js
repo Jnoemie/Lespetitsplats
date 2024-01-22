@@ -1,14 +1,14 @@
 function renderAppareils(dataRecette) {
-  const applianceList = document.getElementById("container_appareils");
-  let appliance = [];
+  const appareilList = document.getElementById("container_appareils");
+  let appareil = [];
 
   dataRecette.forEach((recipe) => {
-    if (recipe.appliance != "" && !appliance.includes(recipe.appliance)) {
-      appliance.push(recipe.appliance);
+    if (recipe.appliance != "" && !appareil.includes(recipe.appliance)) {
+      appareil.push(recipe.appliance);
       const li = document.createElement("LI");
       li.classList.add("appareils_item");
       li.textContent = recipe.appliance;
-      applianceList.appendChild(li);
+      appareilList.appendChild(li);
       
       li.addEventListener("click", (event) => {
         const appareils = event.target.innerText;
