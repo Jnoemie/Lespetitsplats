@@ -11,6 +11,11 @@ function renderUstensiles(dataRecette) {
           li.classList.add("ustensil_item");
           li.textContent = ustensil;
           ustensilsList.appendChild(li);
+          li.addEventListener("click", (event) => {
+            const ustensil = event.target.innerText;
+            updateList("ustensil", ustensil);
+            handleAppareilClick(ustensil);
+          });
         }
       });
     });
@@ -48,7 +53,7 @@ function renderUstensiles(dataRecette) {
         search_ustensil.splice(index, 1);
       }
       // Appelez votre fonction pour gérer les paramètres de recherche
-      getSearchParams();
+      
     });
     tag.appendChild(deleteButton);
   
@@ -59,6 +64,6 @@ function renderUstensiles(dataRecette) {
     search_ustensil.push(ustensil);
   
     // Appelez votre fonction pour gérer les paramètres de recherche
-    getSearchParams();
+   
   }
   

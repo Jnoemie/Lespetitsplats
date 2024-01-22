@@ -11,6 +11,11 @@ function renderIngredients(dataRecette) {
           li.classList.add("ingredients_item");
           li.textContent = ingr.ingredient;
           ingredientsList.appendChild(li);
+          li.addEventListener("click", (event) => {
+            const ingredients = event.target.innerText;
+            updateList("ingredients",ingredients );
+            handleAppareilClick(ingredients);
+          });
         }
       });
     });
@@ -48,7 +53,7 @@ function renderIngredients(dataRecette) {
         search_ingredients.splice(index, 1);
       }
       // Appelez votre fonction pour gérer les paramètres de recherche
-      getSearchParams();
+    
     });
     tag.appendChild(deleteButton);
   
@@ -59,7 +64,7 @@ function renderIngredients(dataRecette) {
     search_ingredients.push(ingredients);
   
     // Appelez votre fonction pour gérer les paramètres de recherche
-    getSearchParams();
+   
   }
   
   

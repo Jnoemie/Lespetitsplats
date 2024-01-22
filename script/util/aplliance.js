@@ -9,8 +9,14 @@ function renderAppareils(dataRecette) {
         li.classList.add("appareils_item");
         li.textContent = recipe.appliance;
         applianceList.appendChild(li);
+        li.addEventListener("click", (event) => {
+            const appareils = event.target.innerText;
+            updateList("appareils", appareils);
+            handleAppareilClick(appareils);
+          });
       }
     });
+    
   }
   function handleAppareilClick(appareils) {
     // Vérifiez si le tag existe déjà dans le conteneur de tags
@@ -45,7 +51,7 @@ function renderAppareils(dataRecette) {
         search_appareil.splice(index, 1);
       }
       // Appelez votre fonction pour gérer les paramètres de recherche
-      getSearchParams();
+     
     });
     tag.appendChild(deleteButton);
   
@@ -56,6 +62,4 @@ function renderAppareils(dataRecette) {
     search_appareil.push(appareils);
   
     // Appelez votre fonction pour gérer les paramètres de recherche
-    getSearchParams();
-  }
-  
+}
