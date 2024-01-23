@@ -1,14 +1,14 @@
+// Définit les variables et éléments DOM nécessaires pour la recherche d'ingrédients, d'ustensiles et d'appareils.
 let search_ingredients = [];
 let search_ustensil = [];
 let search_appareil = [];
-let search_global="";
+let search_global = "";
 
 const ingredientSearchInput = document.getElementById("ingredients_search");
 const ustensilSearchInput = document.getElementById("ustensils_search");
 const appareilSearchInput = document.getElementById("appareils_search");
 
-  
-   //fonction affichage de liste de filtres
+//fonction appelée plus tard pour afficher les recettes en fonction des filtres de recherche.
 async function renderRecipes(dataRecette) {
   const recetteSection = document.getElementById("section");
   // nettoie la liste de recherche
@@ -17,26 +17,24 @@ async function renderRecipes(dataRecette) {
   document.getElementById("container_ingredients").innerHTML = "";
   document.getElementById("container_ustensils").innerHTML = "";
   document.getElementById("container_appareils").innerHTML = "";
- // Traite les appareils
- renderAppareils(dataRecette);
+  // Traite les appareils
+  renderAppareils(dataRecette);
+  // Traite les ustensiles
+  renderUstensiles(dataRecette);
+  // Traite les ingrédients
+  renderIngredients(dataRecette);
 
- // Traite les ustensiles
- renderUstensiles(dataRecette);
+  dataRecette.forEach((recipe) => {
+    const modelRecette = recetteFactory(recipe);
+    const recetteCardDom = modelRecette.getFicheRecette();
+    recetteSection.appendChild(recetteCardDom);
+  });
 
- // Traite les ingrédients
- renderIngredients(dataRecette);
-
- dataRecette.forEach((recipe) => {
-   const modelRecette = recetteFactory(recipe);
-   const recetteCardDom = modelRecette.getFicheRecette();
-   recetteSection.appendChild(recetteCardDom);
- });
-
-  
   updateRecipeCount();
-  
 }
-function searchRecipesClassic(recipes) {
+
+//Filtre les recettes en fonction des critères de recherche.
+function filterRecipesClassic(recipes) {
   let results = [];
 
   for (let i = 0; i < recipes.length; i++) {
@@ -102,7 +100,7 @@ function searchRecipesClassic(recipes) {
     }
 
     // Vérifier si la recette correspond à la requête de recherche (dans le nom, la description ou les ingrédients)
-    
+
     let queryMatch = false;
 
     if (
@@ -120,8 +118,6 @@ function searchRecipesClassic(recipes) {
       }
     }
 
-    
-
     // Si la recette correspond à la fois à la requête de recherche et à tous les filtres, l'ajouter aux résultats
     if (queryMatch && ingredientMatch && appareilMatch && ustensilMatch) {
       results.push(recipe);
@@ -131,13 +127,13 @@ function searchRecipesClassic(recipes) {
   return results;
 }
 
-
+//Recherche les recettes en fonction des critères de recherche actuels et affiche les résultats.
 function searchRecipes(recipes) {
-  
-  let results = searchRecipesClassic(recipes);
- 
+  let results = filterRecipesClassic(recipes);
   renderRecipes(results);
 }
+
+//fonction utilisée pour mettre à jour les listes de filtres d'ingrédients, d'ustensiles ou d'appareils lorsque l'utilisateur interagit avec l'interface utilisateur.
 
 function updateList(type, value) {
   // Mettez à jour la liste d'ingrédients, d'ustensiles ou d'appareils en fonction de l'interaction de l'utilisateur
@@ -153,35 +149,84 @@ function updateList(type, value) {
   }
 }
 
-
-
-
-
-
-
+// fonction qui initialise les événements de l'interface utilisateur, notamment la gestion de la recherche globale et la gestion des filtres.
 function initEvents() {
   document
-.getElementById("field_search")
-.addEventListener("input", function (event) {
-  const inputValue = event.target.value.trim().toLowerCase();
-  search_global = inputValue;
+    .getElementById("field_search")
+    .addEventListener("input", function (event) {
+      const inputValue = event.target.value.trim().toLowerCase();
+      search_global = inputValue;
 
-  if (event.target.value.length >= 3) {
-    // Vérifiez si aucun tag n'est actif
-
-    searchRecipes(recipes);
-  }
-});
-initializeFiltering(
-ingredientSearchInput,
-ustensilSearchInput,
-appareilSearchInput
-);
+      if (event.target.value.length >= 3) {
+          searchRecipes(recipes);
+      }
+    });
+  initializeFiltering(
+    ingredientSearchInput,
+    ustensilSearchInput,
+    appareilSearchInput
+  );
 }
 
+//fonction d'initialisation principale qui est appelée au chargement de la page pour afficher les recettes et initialiser les événements.
+function resetFilters() {
+  search_ingredients = [];
+  search_ustensil = [];
+  search_appareil = [];
+  search_global = "";
+  searchRecipes(recipes);
+}
 async function init() {
   renderRecipes(recipes);
   initEvents();
 }
 
 init();
+
+/*fonction de recherche fonctionnelle
+
+
+function filterRecipesfonctionel(recipes) {
+  return recipes.filter((recipe) => {
+    const ingredientsMatch = search_ingredients.every((ingredient) =>
+      recipe.ingredients.some((recipeIngredient) =>
+        recipeIngredient.ingredient.toLowerCase() === ingredient.toLowerCase()
+      )
+    );
+
+    if (!ingredientsMatch) {
+      return false;
+    }
+
+    if (search_appareil.length > 0) {
+      const appareilMatch = search_appareil.some((appareil) =>
+        recipe.appliance.toLowerCase().includes(appareil.toLowerCase())
+      );
+
+      if (!appareilMatch) {
+        return false;
+      }
+    }
+
+    if (search_ustensil.length > 0) {
+      const ustensilMatch = search_ustensil.some((ustensil) =>
+        recipe.ustensils.some((recipeUstensil) =>
+          recipeUstensil.toLowerCase().includes(ustensil.toLowerCase())
+        )
+      );
+
+      if (!ustensilMatch) {
+        return false;
+      }
+    }
+
+    const queryMatch =
+      recipe.name.toLowerCase().includes(search_global.toLowerCase()) ||
+      recipe.description.toLowerCase().includes(search_global.toLowerCase()) ||
+      recipe.ingredients.some((recipeIngredient) =>
+        recipeIngredient.ingredient.toLowerCase().includes(search_global.toLowerCase())
+      );
+
+    return queryMatch;
+  });
+}*/
