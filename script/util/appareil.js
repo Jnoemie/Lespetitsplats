@@ -15,7 +15,7 @@ function renderAppareils(dataRecette) {
         const appareils = event.target.innerText;
         if (!isTagExistAppareil(appareils)) {
           updateList("appareils", appareils);
-          handleAppareilClick(appareils);
+          addTag(appareils);
         }
       });
     }
@@ -36,34 +36,8 @@ function isTagExistAppareil(appareils) {
   return false;
 }
 //Gère l'action lorsqu'un utilisateur clique sur un appareil pour le sélectionner comme filtre.
-function handleAppareilClick(appareils) {
-  // Vérifiez si le tag existe déjà dans le conteneur de tags
+function addTag(appareil) {
   const tagContainer = document.getElementById("tags_container");
-  const existingTags = tagContainer.querySelectorAll(".tag");
-  for (const existingTag of existingTags) {
-    if (existingTag.textContent === appareils) {
-      // Supprimer l'appareil du tableau search_appareil
-      const index = search_appareil.indexOf(appareils);
-      if (index !== -1) {
-        search_appareil.splice(index, 1);
-      }
-
-      // Supprimer le tag du DOM
-      tagContainer.removeChild(existingTag);
-
-      // Effectuer une nouvelle recherche avec les filtres actuels
-      searchRecipes(recipes);
-
-      // Vérifier s'il ne reste aucun tag, alors réinitialiser la recherche
-      if (existingTags.length === 0) {
-        resetFilters();
-      }
-
-      return;
-    }
-  }
-  
- 
 
   // Créez un élément de tag
   const tag = document.createElement("div");
@@ -71,7 +45,7 @@ function handleAppareilClick(appareils) {
 
   // Texte du tag
   const tagText = document.createElement("span");
-  tagText.textContent = appareils;
+  tagText.textContent = appareil;
   tag.appendChild(tagText);
 
   // Bouton de suppression du tag
@@ -81,21 +55,16 @@ function handleAppareilClick(appareils) {
     // Supprimer le tag du DOM
     tagContainer.removeChild(tag);
     // Supprimer l'appareil du tableau search_appareil
-    const index = search_appareil.indexOf(appareils);
+    const index = search_appareil.indexOf(appareil);
+
     if (index !== -1) {
       search_appareil.splice(index, 1);
     }
 
-    // Vérifier s'il ne reste aucun tag, alors réinitialiser la recherche
-    if (existingTags.length === 0) {
-      resetFilters();
-    }
+    searchRecipes(recipes);
   });
   tag.appendChild(deleteButton);
 
   // Ajoutez le tag à votre conteneur de tags
   tagContainer.appendChild(tag);
-
-  // Ajoutez l'appareil à votre tableau search_appareil si nécessaire
-  search_appareil.push(appareils);
 }
