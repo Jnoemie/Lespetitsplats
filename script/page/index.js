@@ -43,8 +43,8 @@ async function renderRecipes(dataRecette) {
   updateRecipeCount();
 }
 
-//Filtre les recettes en fonction des critères de recherche.
-function filterRecipes(recipes) {
+
+function filterRecipesfonctionel(recipes) {
   return recipes.filter((recipe) => {
     const ingredientsMatch = search_ingredients.every((ingredient) =>
       recipe.ingredients.some((recipeIngredient) =>
@@ -90,11 +90,104 @@ function filterRecipes(recipes) {
 }
 
 
+//Filtre les recettes en fonction des critères de recherche.
+function filterRecipes(recipes) {
+  let results = [];
+
+  for (let i = 0; i < recipes.length; i++) {
+    const recipe = recipes[i];
+    let ingredientMatch = true;
+    let appareilMatch = true;
+    let ustensilMatch = true;
+
+    // Vérifier si les filtres sont définis et, le cas échéant, si la recette correspond au filtre
+    for (let j = 0; j < search_ingredients.length; j++) {
+      const ingredient = search_ingredients[j].toLowerCase();
+
+      for (let k = 0; k < recipe.ingredients.length; k++) {
+        const recipeIngredient = recipe.ingredients[k].ingredient.toLowerCase();
+
+        if (ingredient === recipeIngredient) {
+          ingredientMatch = true;
+          break;
+        } else {
+          ingredientMatch = false; // Mise à jour de la variable si aucune correspondance n'est trouvée
+        }
+      }
+
+      if (!ingredientMatch) {
+        break;
+      }
+    }
+
+    if (search_appareil.length > 0) {
+      let appareilMatch = false;
+      for (let l = 0; l < search_appareil.length; l++) {
+        const appareil = search_appareil[l].toLowerCase();
+        if (recipe.appliance.toLowerCase().includes(appareil)) {
+          appareilMatch = true;
+          break;
+        }
+      }
+
+      if (!appareilMatch) {
+        continue; // Passe à la recette suivante si aucune correspondance d'appareil n'est trouvée
+      }
+    }
+
+    if (search_ustensil.length > 0) {
+      let ustensilMatch = false;
+      for (let m = 0; m < search_ustensil.length; m++) {
+        const ustensil = search_ustensil[m].toLowerCase();
+        for (let n = 0; n < recipe.ustensils.length; n++) {
+          if (recipe.ustensils[n].toLowerCase().includes(ustensil)) {
+            ustensilMatch = true;
+            break;
+          }
+        }
+
+        if (ustensilMatch) {
+          break;
+        }
+      }
+
+      if (!ustensilMatch) {
+        continue; // Passe à la recette suivante si aucune correspondance d'ustensile n'est trouvée
+      }
+    }
+
+    // Vérifier si la recette correspond à la requête de recherche (dans le nom, la description ou les ingrédients)
+
+    let queryMatch = false;
+
+    if (
+      recipe.name.toLowerCase().includes(search_global.toLowerCase()) ||
+      recipe.description.toLowerCase().includes(search_global.toLowerCase())
+    ) {
+      queryMatch = true;
+    } else {
+      for (let p = 0; p < recipe.ingredients.length; p++) {
+        const ingredient = recipe.ingredients[p].ingredient.toLowerCase();
+        if (ingredient.includes(search_global.toLowerCase())) {
+          queryMatch = true;
+          break;
+        }
+      }
+    }
+
+    // Si la recette correspond à la fois à la requête de recherche et à tous les filtres, l'ajouter aux résultats
+    if (queryMatch && ingredientMatch && appareilMatch && ustensilMatch) {
+      results.push(recipe);
+    }
+  }
+
+  return results;
+}
 
 
 //Recherche les recettes en fonction des critères de recherche actuels et affiche les résultats.
 function searchRecipes(recipes) {
-  let results = filterRecipes(recipes);
+  let results = filterRecipesClassic(recipes);
   renderRecipes(results);
 }
 
@@ -154,3 +247,7 @@ async function init() {
 
 init();
 
+/*fonction de recherche fonctionnelle
+
+
+*/
