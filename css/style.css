@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Manrope&display=swap');
 
 
 
@@ -72,30 +74,10 @@ header {
     margin-bottom: 1rem;
   }
   
-  .filtre_resultat {
-    display: flex;
-    flex-wrap: wrap;
-    row-gap: .5rem;
-    margin-bottom: 1rem;
-  }
   
-.search_list_criterias {
-  list-style-type: none;  
-  padding: 0;
-  margin: 0;
-}
 
-.search_list_criterias li {
-  list-style-type: none;
-  padding: 4px 8px;
-  margin: 0;
-}
 
-.search_list_criterias li:hover {
-  background-color: lightskyblue;
-}
-
-  .filtre_element_ustensils {
+  .tag {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -103,44 +85,21 @@ header {
     padding: .5rem .5rem .5rem .5rem;
     background-color: #FFD15B;
     border-radius: .5rem;
+    width: fit-content;
+  }
+  .tag button{
+    margin-left: 6px;
+    margin-top:4px ;
+    background-color: transparent;
+    border-color: transparent;
   }
   
-  .filtre_element_ingredients {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 0 0 0 .5rem;
-    padding: .5rem .5rem .5rem .5rem;
-    background-color:#FFD15B ;
-    border-radius: .5rem;
-  }
-  
-  .filtre_element_appareils {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 0 0 0 .5rem;
-    padding: .5rem .5rem .5rem .5rem;
-    background-color:#FFD15B ;
-    border-radius: .5rem;
-  }
-  
-  .filtre_element_text {
-    font-size: .9rem;
-    font-family: 'Manrope', sans-serif;
-    margin-right: .5rem;
-  }
-  
+ 
   .xmark {
     margin-left: .5rem;
     cursor: pointer;
   }
   
-  .not_found {
-    font-size: .9rem;
-    font-weight: 600;
-    font-family: 'Manrope', sans-serif;
-  }
   
   .selections {
     display: flex;
@@ -216,7 +175,7 @@ header {
   .filtre_ingredients {
     display: none;
     font-family: 'Manrope', sans-serif;
-    font-size: .85rem;
+    font-size:16px;
     width: 10rem;
     position: absolute;
     background-color: white;
@@ -226,25 +185,35 @@ header {
     z-index: 2;
   }
   
-  .filtre_ingredients p {
+  .filtre_ingredients li {
     margin: 0 0 .3rem .6rem;
   }
   
-  .filtre_ingredients p:hover {
+  .filtre_ingredients li:hover {
     background-color: #FFD15B;
     font-weight: 700;
     cursor: pointer;
   }
   
   .container_ingredients {
-    height: 16rem;
+    max-height: 16rem;
     overflow-y: auto;
+    list-style-type: none;  
+  padding: 0;
+  margin: 0;
+  display:flex;
+  flex-direction: column;
+  gap:2px;
+  font-size: 16px;
+  font-weight: 400;
+  font-family: 'Manrope';
+    
   }
   
   .filtre_appareils {
     display: none;
     font-family: 'Manrope', sans-serif;
-    font-size: .85rem;
+    font-size: 16px;
     width: 10rem;
     position: absolute;
     background-color: white;
@@ -254,25 +223,34 @@ header {
     z-index: 2;
   }
   
-  .filtre_appareils p {
+  .filtre_appareils li {
     margin: 0 0 .3rem .6rem;
   }
   
-  .filtre_appareils p:hover {
+  .filtre_appareils li:hover {
     background-color: #FFD15B;
     font-weight: 700;
     cursor: pointer;
   }
   
   .container_appareils {
-    height: 16rem;
+    max-height: 16rem;
     overflow-y: auto;
+    list-style-type: none;  
+  padding: 0;
+  margin: 0;
+  display:flex;
+  flex-direction: column;
+  gap:2px;
+  font-size: 16px;
+  font-weight: 400;
+  font-family: 'Manrope';
   }
   
   .filtre_ustensils {
     display: none;
     font-family: 'Manrope', sans-serif;
-    font-size: .85rem;
+    font-size: 16px;
     width: 10rem;
     position: absolute;
     background-color: white ;
@@ -282,19 +260,28 @@ header {
     z-index: 2;
   }
   
-  .filtre_ustensils p {
+  .filtre_ustensils li {
     margin: 0 0 .3rem .6rem;
   }
   
-  .filtre_ustensils p:hover {
+  .filtre_ustensils li:hover {
     background-color: #FFD15B;
     font-weight: 700;
     cursor: pointer;
   }
   
   .container_ustensils {
-    height: 16rem;
+    max-height: 16rem;
     overflow-y: auto;
+    list-style-type: none;  
+  padding: 0;
+  margin: 0;
+  display:flex;
+  flex-direction: column;
+  gap:2px;
+  font-size: 16px;
+  font-weight: 400;
+  font-family: 'Manrope';
   }
   
   #ingredients_search {
@@ -326,7 +313,7 @@ header {
   
   .magnifying_glass {
     position: relative;
-    top: -2.7rem;
+    top: -2.5rem;
     left: 8rem;
     opacity: .3;
   }
@@ -334,7 +321,7 @@ header {
   .recipe-card {
     position: relative;
     width: 380px;
-    height: 770px;
+    height: 781px;
     overflow: hidden;
     display: flex;
     flex-direction: column;
@@ -367,10 +354,14 @@ header {
   }
   .recipe-section {
     padding: 20px;
+    display:flex;
+    flex-direction: column;
+    height: 505px;
   }
   .recipe-section h2 {
     font-weight: 600;
     font-size: 20px;
+
   }
   .recipe-section h3 {
     color: #7A7A7A;
@@ -380,10 +371,12 @@ header {
     margin: 20px 0;
   }
   .recipe-description {
-    height: 76px;
-    font-weight: 400;
-    font-size: 14px;
+    height:120px;
+    font-weight: 100;
+    font-size: 16px;
     overflow: hidden;
+    font-family:'Manrope';
+  
   }
   .recipe-titleIngredients {
     display: grid;
@@ -392,6 +385,7 @@ header {
   .recipe-ingredient {
     display: flex;
     flex-direction: column;
+    font-family:'Manrope';
   }
   .recipe-ingredient h4 {
     font-weight: 600;
@@ -412,3 +406,18 @@ header {
     margin-top: 50px;
     
   }
+  #nbr_recettes{
+    width: 190px;
+    height:32px;
+    font-weight: 600;
+  font-size: 21px;
+  line-height: 47px;
+
+
+  }
+  #not_found {
+    font-size: .9rem;
+    font-weight: 600;
+    font-family: 'Manrope', sans-serif;
+  }
+  
