@@ -70,4 +70,4 @@ function addTag(ingredient) {
 
   // Ajoutez le tag à votre conteneur de tags
   tagContainer.appendChild(tag);
-}
+}njn
