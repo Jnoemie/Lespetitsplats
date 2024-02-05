@@ -11,23 +11,17 @@ const appareilSearchInput = document.getElementById("appareils_search");
 //fonction appelée plus tard pour afficher les recettes en fonction des filtres de recherche.
 async function renderRecipes(dataRecette) {
 const recetteSection = document.getElementById("section");
-  document.addEventListener('DOMContentLoaded', function () {
-    
-    const notFoundDiv = document.querySelector(".not_found");
-  
-    const needle = document.getElementById('field_search').value.trim();
-    const recettes = document.querySelectorAll(".recette"); // Sélectionnez tous les éléments avec la classe "recette"
-  
-    if (needle.length > 0) {
-      if (recettes.length === 0) {
-        notFoundDiv.innerHTML = `
-          Aucune recette ne contient ‘${needle}’. Vous pouvez chercher « tarte aux pommes », « poisson », etc...
-        `;
-      } else {
-        notFoundDiv.innerHTML = '';
-      }
-    }
-  });
+const listeRecette = document.querySelectorAll(".recipe-card")
+const notFoundDiv = document.querySelector(".not_found");
+
+const needle = document.getElementById('field_search').value.trim();
+if (listeRecette.length === 0) {
+notFoundDiv.innerHTML = `
+  Aucune recette ne contient ‘${needle}’. Vous pouvez chercher « tarte aux pommes », « poisson », etc...
+`;
+} else {
+notFoundDiv.innerHTML = '';
+}
 
   // nettoie la liste de recherche
   document.querySelector(".listeRecettes").innerHTML = "";

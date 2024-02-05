@@ -16,7 +16,7 @@ function renderUstensiles(dataRecette) {
             const ustensil = event.target.innerText;
             if (!isTagExistUstensil(ustensil)) {
               updateList("ustensils", ustensil);
-              addTag(ustensil);
+              addUstensilTag(ustensil);
             }
           });
         }
@@ -39,7 +39,7 @@ function isTagExistUstensil(ustensil) {
   return false;
 }
 //Gère l'action lorsqu'un utilisateur clique sur un appareil pour le sélectionner comme filtre.
-function addTag(ustensil) {
+function addUstensilTag(ustensil) {
   const tagContainer = document.getElementById("tags_container");
 
   // Créez un élément de tag
@@ -62,9 +62,10 @@ function addTag(ustensil) {
 
     if (index !== -1) {
       search_ustensil.splice(index, 1);
+      searchRecipes(recipes);
     }
 
-    searchRecipes(recipes);
+   
   });
   tag.appendChild(deleteButton);
 

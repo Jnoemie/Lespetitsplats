@@ -16,10 +16,11 @@ function renderIngredients(dataRecette) {
           const ingredient = event.target.innerText;
           if (!isTagExistIngredient(ingredient)) {
             updateList("ingredients", ingredient);
-            addTag(ingredient);
+            addIngredientTag(ingredient);
           }
         });
       }
+
     });
   });
 }
@@ -39,7 +40,7 @@ function isTagExistIngredient(ingredient) {
   return false;
 }
 
-function addTag(ingredient) {
+function addIngredientTag(ingredient) {
   const tagContainer = document.getElementById("tags_container");
 
   // Créez un élément de tag
@@ -62,12 +63,13 @@ function addTag(ingredient) {
 
     if (index !== -1) {
       search_ingredients.splice(index, 1);
+       searchRecipes(recipes)
     }
 
-    searchRecipes(recipes);
+   
   });
   tag.appendChild(deleteButton);
-
+  searchRecipes(recipes);
   // Ajoutez le tag à votre conteneur de tags
   tagContainer.appendChild(tag);
 }

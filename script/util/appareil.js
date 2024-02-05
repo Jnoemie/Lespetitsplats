@@ -12,10 +12,10 @@ function renderAppareils(dataRecette) {
       appareilList.appendChild(li);
 
       li.addEventListener("click", (event) => {
-        const appareils = event.target.innerText;
-        if (!isTagExistAppareil(appareils)) {
-          updateList("appareils", appareils);
-          addTag(appareils);
+        const appareil = event.target.innerText;
+        if (!isTagExistAppareil(appareil)) {
+          updateList("appareils", appareil);
+          addAppareilTag(appareil);
         }
       });
     }
@@ -36,7 +36,7 @@ function isTagExistAppareil(appareils) {
   return false;
 }
 //Gère l'action lorsqu'un utilisateur clique sur un appareil pour le sélectionner comme filtre.
-function addTag(appareil) {
+function addAppareilTag(appareil) {
   const tagContainer = document.getElementById("tags_container");
 
   // Créez un élément de tag
@@ -59,9 +59,10 @@ function addTag(appareil) {
 
     if (index !== -1) {
       search_appareil.splice(index, 1);
+      searchRecipes(recipes);
     }
 
-    searchRecipes(recipes);
+    
   });
   tag.appendChild(deleteButton);
 
