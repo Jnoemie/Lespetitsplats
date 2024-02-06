@@ -1,17 +1,18 @@
-//Affiche la liste des appareils utilisés dans les recettes et ajoute des gestionnaires d'événements pour le filtrage.
+// Affiche la liste des appareils utilisés dans les recettes et ajoute des gestionnaires d'événements pour le filtrage.
 function renderAppareils(dataRecette) {
   const appareilList = document.getElementById("container_appareils");
   let appareil = [];
 
-  dataRecette.forEach((recipe) => {
-    if (recipe.appliance != "" && !appareil.includes(recipe.appliance)) {
+  for (let i = 0; i < dataRecette.length; i++) {
+    const recipe = dataRecette[i];
+    if (recipe.appliance !== "" && appareil.indexOf(recipe.appliance) === -1) {
       appareil.push(recipe.appliance);
-      const li = document.createElement("LI");
-      li.classList.add("appareils_item");
-      li.textContent = recipe.appliance;
-      appareilList.appendChild(li);
+      const p = document.createElement("p");
+      p.classList.add("appareils_item");
+      p.textContent = recipe.appliance;
+      appareilList.appendChild(p);
 
-      li.addEventListener("click", (event) => {
+      p.addEventListener("click", function (event) {
         const appareil = event.target.innerText;
         if (!isTagExistAppareil(appareil)) {
           updateList("appareils", appareil);
@@ -19,15 +20,17 @@ function renderAppareils(dataRecette) {
         }
       });
     }
-  });
+  }
 }
-//Vérifie si le tag (appareil) existe déjà dans le conteneur de tags.
+
+// Vérifie si le tag (appareil) existe déjà dans le conteneur de tags.
 function isTagExistAppareil(appareils) {
   // Vérifiez si le tag existe déjà dans le conteneur de tags
   const tagContainer = document.getElementById("tags_container");
   const existingTags = tagContainer.querySelectorAll(".tag");
 
-  for (const existingTag of existingTags) {
+  for (let i = 0; i < existingTags.length; i++) {
+    const existingTag = existingTags[i];
     if (existingTag.textContent === appareils) {
       // Le tag existe déjà
       return true;
@@ -35,7 +38,8 @@ function isTagExistAppareil(appareils) {
   }
   return false;
 }
-//Gère l'action lorsqu'un utilisateur clique sur un appareil pour le sélectionner comme filtre.
+
+// Gère l'action lorsqu'un utilisateur clique sur un appareil pour le sélectionner comme filtre.
 function addAppareilTag(appareil) {
   const tagContainer = document.getElementById("tags_container");
 
@@ -51,7 +55,7 @@ function addAppareilTag(appareil) {
   // Bouton de suppression du tag
   const deleteButton = document.createElement("button");
   deleteButton.textContent = "X";
-  deleteButton.addEventListener("click", () => {
+  deleteButton.addEventListener("click", function () {
     // Supprimer le tag du DOM
     tagContainer.removeChild(tag);
     // Supprimer l'appareil du tableau search_appareil
@@ -61,11 +65,14 @@ function addAppareilTag(appareil) {
       search_appareil.splice(index, 1);
       searchRecipes(recipes);
     }
-
-    
   });
   tag.appendChild(deleteButton);
 
   // Ajoutez le tag à votre conteneur de tags
   tagContainer.appendChild(tag);
+  const appareilsList = document.getElementById("container_appareils");
+  const p = document.createElement("p");
+  p.classList.add("appareil_item");
+  p.textContent = appareil;
+  appareilsList.insertBefore(p, appareilsList.firstChild);
 }

@@ -81,11 +81,11 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 0 0 0 .5rem;
     padding: .5rem .5rem .5rem .5rem;
     background-color: #FFD15B;
     border-radius: .5rem;
-    width: fit-content;
+    min-width: 145px;
+    font-family:'Manrope', sans-serif; ;
   }
   .tag button{
     margin-left: 6px;
@@ -94,7 +94,11 @@ header {
     border-color: transparent;
   }
   
- 
+  #tags_container{
+    display: flex;
+    flex-wrap: wrap;
+    gap:10px;
+  }
   .xmark {
     margin-left: .5rem;
     cursor: pointer;
@@ -185,11 +189,12 @@ header {
     z-index: 2;
   }
   
-  .filtre_ingredients li {
-    margin: 0 0 .3rem .6rem;
+  .filtre_ingredients p {
+    margin: 0 ;
+    padding: 1px 8px;
   }
   
-  .filtre_ingredients li:hover {
+  .filtre_ingredients p:hover {
     background-color: #FFD15B;
     font-weight: 700;
     cursor: pointer;
@@ -223,11 +228,12 @@ header {
     z-index: 2;
   }
   
-  .filtre_appareils li {
-    margin: 0 0 .3rem .6rem;
+  .filtre_appareils p {
+    margin: 0 ;
+    padding: 1px 8px;
   }
   
-  .filtre_appareils li:hover {
+  .filtre_appareils p:hover {
     background-color: #FFD15B;
     font-weight: 700;
     cursor: pointer;
@@ -260,11 +266,12 @@ header {
     z-index: 2;
   }
   
-  .filtre_ustensils li {
-    margin: 0 0 .3rem .6rem;
+  .filtre_ustensils p {
+    margin: 0 ;
+    padding: 1px 8px;
   }
   
-  .filtre_ustensils li:hover {
+  .filtre_ustensils p:hover {
     background-color: #FFD15B;
     font-weight: 700;
     cursor: pointer;
@@ -313,7 +320,7 @@ header {
   
   .magnifying_glass {
     position: relative;
-    top: -2.5rem;
+    top: -2.7rem;
     left: 8rem;
     opacity: .3;
   }
@@ -421,3 +428,6 @@ header {
     font-family: 'Manrope', sans-serif;
   }
   
+input:focus-visible{
+  outline:grey;
+}
