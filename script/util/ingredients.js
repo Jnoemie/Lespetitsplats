@@ -9,12 +9,12 @@ function renderIngredients(dataRecette) {
       const ingr = recipe.ingredients[j];
       if (!ingredients.includes(ingr.ingredient)) {
         ingredients.push(ingr.ingredient);
-        const p = document.createElement("p");
-        p.classList.add("ingredients_item");
-        p.textContent = ingr.ingredient;
-        ingredientsList.appendChild(p);
+        const li= document.createElement("LI");
+        li.classList.add("ingredients_item");
+        li.textContent = ingr.ingredient;
+        ingredientsList.appendChild(li);
 
-        p.addEventListener("click", function (event) {
+        li.addEventListener("click", function (event) {
           const ingredient = event.target.innerText;
           if (!isTagExistIngredient(ingredient)) {
             updateList("ingredients", ingredient);
@@ -73,8 +73,8 @@ function addIngredientTag(ingredient) {
   // Ajoutez le tag à votre conteneur de tags
   tagContainer.appendChild(tag);
   const ingredientsList = document.getElementById("container_ingredients");
-  const p = document.createElement("p");
-  p.classList.add("ingredients_item");
-  p.textContent = ingredient;
-  ingredientsList.insertBefore(p, ingredientsList.firstChild);
+  const li = document.createElement("LI");
+  li.classList.add("ingredients_item");
+  li.textContent = ingredient;
+  ingredientsList.insertBefore(li, ingredientsList.firstChild);
 }

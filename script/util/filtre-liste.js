@@ -16,7 +16,7 @@ function initializeFiltering(ingredientInput, ustensilInput, appareilInput) {
 
     function filterList(containerId, query) {
       const container = document.getElementById(containerId);
-      const items = container.getElementsByTagName("p");
+      const items = container.getElementsByTagName("LI");
 
       for (let i = 0; i < items.length; i++) {
         const item = items[i];

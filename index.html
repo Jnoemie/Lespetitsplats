@@ -1,105 +1,186 @@
 <!DOCTYPE html>
 <html lang="fr">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        
-        <link rel="stylesheet" href="./css/style.css">
-        <title>Les petits plats</title>
-    </head>
-    <body>
-        <header>
-            <img src="./assets/Logo.png" alt="Logo les petits plats">
-            <h1>cherchez parmi plus de 1500 recettes du quotidien, simples et délicieuses</h1>
-            <div  class="search">
-              <input type="text" name="recherche" id="field_search" title="recherche"
-                placeholder="Rechercher une recette, un ingrédient, ...">
-              <img id="search_button" src="./assets/search.png" alt="chercher">
-            </div>
-        </header>
-        <main>
-          <div class="filtres">
-            <div class="filtre_selection">
-              <div class="selections">
-                <div class="ingredients">
-                  <button class="dropdown_btn btn_ingredients">Ingrédients</button>
-                  <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512" class="chevron_down_ingredients" id="ingredients_down">
-                    <path d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z" />
-                  </svg>
-                  <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512" class="chevron_up_ingredients" id="ingredients_up">
-                    <path d="M233.4 105.4c12.5-12.5 32.8-12.5 45.3 0l192 192c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L256 173.3 86.6 342.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l192-192z" />
-                  </svg>
-                  <div id="filtre_ingredients" class="filtre_ingredients">
-                    <input type="search" name="filter" id="ingredients_search" title="recherche ingredients" data-name="list-ingredients">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512" class="magnifying_glass">
-                      <path
-                        d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z" />
-                    </svg>
-                    <div id="container_ingredients" class="container_ingredients search_list_criterias">
-                      
-                    </div>
-                   
-                  </div>
-                </div>
-                <div class="appareils">
-                  <button class="dropdown_btn btn_appareils">Appareils</button>
-                  <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512" class="chevron_down_appareils" id="appareils_down">
-                    <path
-                      d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z" />
-                  </svg>
-                  <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512" class="chevron_up_appareils" id="appareils_up">
-                    <path
-                      d="M233.4 105.4c12.5-12.5 32.8-12.5 45.3 0l192 192c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L256 173.3 86.6 342.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l192-192z" />
-                  </svg>
-                  <div id="filtre_appareils" class="filtre_appareils">
-                    <input type="search" name="filter" id="appareils_search" title="recherche appareils">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512" class="magnifying_glass">
-                      <path
-                        d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z" />
-                    </svg>
-                    <ul id="container_appareils" class="container_appareils search_list_criterias "></ul>
-               
-                  </div>
-                </div>
-                <div class="ustensils">
-                  <button class="dropdown_btn btn_ustensils">Ustensiles</button>
-                  <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512" class="chevron_down_ustensils" id="ustensils_down">
-                    <path
-                      d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z" />
-                  </svg>
-                  <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512" class="chevron_up_ustensils" id="ustensils_up">
-                    <path
-                      d="M233.4 105.4c12.5-12.5 32.8-12.5 45.3 0l192 192c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L256 173.3 86.6 342.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l192-192z" />
-                  </svg>
-                  <div id="filtre_ustensils" class="filtre_ustensils">
-                    <input type="search" name="filter" id="ustensils_search" title="recherche ustensils">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512" class="magnifying_glass">
-                      <path
-                        d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z" />
-                    </svg>
-                    <ul id="container_ustensils" class="container_ustensils search_list_criterias "></ul>
-                  
-                  </div>
-                </div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="./css/style.css" />
+    <title>Les petits plats</title>
+  </head>
+  <body>
+    <header>
+      <img src="./assets/Logo.png" alt="Logo les petits plats" />
+      <h1>
+        cherchez parmi plus de 1500 recettes du quotidien, simples et
+        délicieuses
+      </h1>
+      <div class="search">
+        <input
+          type="text"
+          name="recherche"
+          id="field_search"
+          title="recherche"
+          placeholder="Rechercher une recette, un ingrédient, ..."
+        />
+        <img id="search_button" src="./assets/search.png" alt="chercher" />
+      </div>
+    </header>
+    <main>
+      <div class="filtres">
+        <div class="filtre_selection">
+          <div class="selections">
+            <div class="ingredients">
+              <button class="dropdown_btn btn_ingredients">Ingrédients</button>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                height="1em"
+                viewBox="0 0 512 512"
+                class="chevron_down_ingredients"
+                id="ingredients_down"
+              >
+                <path
+                  d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"
+                />
+              </svg>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                height="1em"
+                viewBox="0 0 512 512"
+                class="chevron_up_ingredients"
+                id="ingredients_up"
+              >
+                <path
+                  d="M233.4 105.4c12.5-12.5 32.8-12.5 45.3 0l192 192c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L256 173.3 86.6 342.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l192-192z"
+                />
+              </svg>
+              <div id="filtre_ingredients" class="filtre_ingredients">
+                <input
+                  type="search"
+                  name="filter"
+                  id="ingredients_search"
+                  title="recherche ingredients"
+                  data-name="list-ingredients"
+                />
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  height="1em"
+                  viewBox="0 0 512 512"
+                  class="magnifying_glass"
+                >
+                  <path
+                    d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"
+                  />
+                </svg>
+                <ul id="container_ingredients"></ul>
               </div>
-              <span id="nbr_recettes"></span>
             </div>
-            <div id="tags_container"></div>
+            <div class="appareils">
+              <button class="dropdown_btn btn_appareils">Appareils</button>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                height="1em"
+                viewBox="0 0 512 512"
+                class="chevron_down_appareils"
+                id="appareils_down"
+              >
+                <path
+                  d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"
+                />
+              </svg>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                height="1em"
+                viewBox="0 0 512 512"
+                class="chevron_up_appareils"
+                id="appareils_up"
+              >
+                <path
+                  d="M233.4 105.4c12.5-12.5 32.8-12.5 45.3 0l192 192c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L256 173.3 86.6 342.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l192-192z"
+                />
+              </svg>
+              <div id="filtre_appareils" class="filtre_appareils">
+                <input
+                  type="search"
+                  name="filter"
+                  id="appareils_search"
+                  title="recherche appareils"
+                />
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  height="1em"
+                  viewBox="0 0 512 512"
+                  class="magnifying_glass"
+                >
+                  <path
+                    d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"
+                  />
+                </svg>
+                <ul id="container_appareils"></ul>
+              </div>
+            </div>
+            <div class="ustensils">
+              <button class="dropdown_btn btn_ustensils">Ustensiles</button>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                height="1em"
+                viewBox="0 0 512 512"
+                class="chevron_down_ustensils"
+                id="ustensils_down"
+              >
+                <path
+                  d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"
+                />
+              </svg>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                height="1em"
+                viewBox="0 0 512 512"
+                class="chevron_up_ustensils"
+                id="ustensils_up"
+              >
+                <path
+                  d="M233.4 105.4c12.5-12.5 32.8-12.5 45.3 0l192 192c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L256 173.3 86.6 342.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l192-192z"
+                />
+              </svg>
+              <div id="filtre_ustensils" class="filtre_ustensils">
+                <input
+                  type="search"
+                  name="filter"
+                  id="ustensils_search"
+                  title="recherche ustensils"
+                />
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  height="1em"
+                  viewBox="0 0 512 512"
+                  class="magnifying_glass"
+                >
+                  <path
+                    d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"
+                  />
+                </svg>
+                <ul id="container_ustensils"></ul>
+              </div>
+            </div>
           </div>
-        
-          <div id="section"></div>
-          <div class="not_found" ></div>
-    
-          <div class="listeRecettes"></div>
-        </main>
-        <script src="./data/recipes.js"></script> 
-        <script src="./script/recettes.js"></script>
-        <script src="./script/util/count-recipes.js"></script>
-        <script src="./script/util/appareil.js"></script>
-        <script src="./script/util/ingredients.js"></script>
-        <script src="./script/util/ustensils.js"></script>
-       <script src="./script/util/filtre-liste.js"></script>
-       <script src="./script/util/dropdown.js"></script>
-        <script src="./script/page/index.js"></script>
-    </body>
+          <span id="nbr_recettes"></span>
+        </div>
+        <div id="tags_container"></div>
+      </div>
+
+      <div id="section"></div>
+      <div class="not_found"></div>
+
+      <div class="listeRecettes"></div>
+    </main>
+    <script src="./data/recipes.js"></script>
+    <script src="./script/recettes.js"></script>
+    <script src="./script/util/count-recipes.js"></script>
+    <script src="./script/util/appareil.js"></script>
+    <script src="./script/util/ingredients.js"></script>
+    <script src="./script/util/ustensils.js"></script>
+    <script src="./script/util/filtre-liste.js"></script>
+    <script src="./script/util/dropdown.js"></script>
+    <script src="./script/page/index.js"></script>
+  </body>
 </html>

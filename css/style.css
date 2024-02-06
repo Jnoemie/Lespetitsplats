@@ -189,18 +189,18 @@ header {
     z-index: 2;
   }
   
-  .filtre_ingredients p {
+  .filtre_ingredients li {
     margin: 0 ;
     padding: 1px 8px;
   }
   
-  .filtre_ingredients p:hover {
+  .filtre_ingredients li:hover {
     background-color: #FFD15B;
     font-weight: 700;
     cursor: pointer;
   }
   
-  .container_ingredients {
+  #container_ingredients {
     max-height: 16rem;
     overflow-y: auto;
     list-style-type: none;  
@@ -228,18 +228,18 @@ header {
     z-index: 2;
   }
   
-  .filtre_appareils p {
+  .filtre_appareils li {
     margin: 0 ;
     padding: 1px 8px;
   }
   
-  .filtre_appareils p:hover {
+  .filtre_appareils li:hover {
     background-color: #FFD15B;
     font-weight: 700;
     cursor: pointer;
   }
   
-  .container_appareils {
+  #container_appareils {
     max-height: 16rem;
     overflow-y: auto;
     list-style-type: none;  
@@ -266,18 +266,18 @@ header {
     z-index: 2;
   }
   
-  .filtre_ustensils p {
+  .filtre_ustensils li {
     margin: 0 ;
     padding: 1px 8px;
   }
   
-  .filtre_ustensils p:hover {
+  .filtre_ustensils li:hover {
     background-color: #FFD15B;
     font-weight: 700;
     cursor: pointer;
   }
   
-  .container_ustensils {
+  #container_ustensils {
     max-height: 16rem;
     overflow-y: auto;
     list-style-type: none;  
@@ -295,7 +295,7 @@ header {
     display: block;
     width: 9rem;
     height: 2rem;
-    margin: 1rem auto 1rem auto;
+    margin: 1rem auto 0 auto;
     border: .15rem #7A7A7A solid;
     border-radius: .2rem;
   }
@@ -304,7 +304,7 @@ header {
     display: block;
     width: 9rem;
     height: 2rem;
-    margin: 1rem auto 1rem auto;
+    margin: 1rem auto 0 auto;
     border: .15rem #7A7A7A solid;
     border-radius: .2rem;
   }
@@ -313,14 +313,14 @@ header {
     display: block;
     width: 9rem;
     height: 2rem;
-    margin: 1rem auto 1rem auto;
+    margin: 1rem auto 0 auto;
     border: .15rem  #7A7A7A solid;
     border-radius: .2rem;
   }
   
   .magnifying_glass {
     position: relative;
-    top: -2.7rem;
+    top: -1.7rem;
     left: 8rem;
     opacity: .3;
   }
@@ -375,10 +375,10 @@ header {
     font-weight: 500;
     font-size: 15px;
     text-transform: uppercase;
-    margin: 20px 0;
+    margin: 12px 0;
   }
   .recipe-description {
-    height:120px;
+    height:133px;
     font-weight: 100;
     font-size: 16px;
     overflow: hidden;
@@ -397,12 +397,13 @@ header {
   .recipe-ingredient h4 {
     font-weight: 600;
     font-size: 15px;
+    margin: 12px 0;
   }
   .recipe-ingredient span {
     color: #7A7A7A;
     font-weight: 400;
     font-size: 15px;
-    margin-top: 5px;
+  
   }
   .listeRecettes {
     display: flex;
@@ -430,4 +431,9 @@ header {
   
 input:focus-visible{
   outline:grey;
+}
+ul{
+  list-style-type: none;
+  padding :0;
+  margin:0;
 }
