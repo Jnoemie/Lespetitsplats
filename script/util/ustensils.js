@@ -1,30 +1,30 @@
 // Fonction pour traiter les ustensiles
 function renderUstensiles(dataRecette) {
-    const ustensilsList = document.getElementById("container_ustensils");
-    let ustensils = [];
-  
-    dataRecette.forEach((recipe) => {
-      recipe.ustensils.forEach((ustensil) => {
-        if (!ustensils.includes(ustensil)) {
-          ustensils.push(ustensil);
-          const li = document.createElement("LI");
-          li.classList.add("ustensil_item");
-          li.textContent = ustensil;
-          ustensilsList.appendChild(li);
+  const ustensilsList = document.getElementById("container_ustensils");
+  let ustensils = [];
 
-          li.addEventListener("click", (event) => {
-            const ustensil = event.target.innerText;
-            if (!isTagExistUstensil(ustensil)) {
-              updateList("ustensils", ustensil);
-              addTag(ustensil);
-            }
-          });
-        }
-      });
+  dataRecette.forEach((recipe) => {
+    recipe.ustensils.forEach((ustensil) => {
+      if (!ustensils.includes(ustensil)) {
+        ustensils.push(ustensil);
+        const p = document.createElement("p");
+        p.classList.add("ustensil_item");
+        p.textContent = ustensil;
+        ustensilsList.appendChild(p);
+
+        p.addEventListener("click", (event) => {
+          const ustensil = event.target.innerText;
+          if (!isTagExistUstensil(ustensil)) {
+            updateList("ustensils", ustensil);
+            addUstensilTag(ustensil);
+          }
+        });
+      }
     });
-  }
- 
-  //Vérifie si le tag (appareil) existe déjà dans le conteneur de tags.
+  });
+}
+
+//Vérifie si le tag (appareil) existe déjà dans le conteneur de tags.
 function isTagExistUstensil(ustensil) {
   // Vérifiez si le tag existe déjà dans le conteneur de tags
   const tagContainer = document.getElementById("tags_container");
@@ -38,8 +38,8 @@ function isTagExistUstensil(ustensil) {
   }
   return false;
 }
-//Gère l'action lorsqu'un utilisateur clique sur un appareil pour le sélectionner comme filtre.
-function addTag(ustensil) {
+// Gère l'action lorsqu'un utilisateur clique sur un ustensil pour le sélectionner comme filtre.
+function addUstensilTag(ustensil) {
   const tagContainer = document.getElementById("tags_container");
 
   // Créez un élément de tag
@@ -54,20 +54,24 @@ function addTag(ustensil) {
   // Bouton de suppression du tag
   const deleteButton = document.createElement("button");
   deleteButton.textContent = "X";
-  deleteButton.addEventListener("click", () => {
+  deleteButton.addEventListener("click", function () {
     // Supprimer le tag du DOM
     tagContainer.removeChild(tag);
-    // Supprimer l'appareil du tableau search_appareil
+    // Supprimer l'ustensil du tableau search_ustensil
     const index = search_ustensil.indexOf(ustensil);
 
     if (index !== -1) {
       search_ustensil.splice(index, 1);
+      searchRecipes(recipes);
     }
-
-    searchRecipes(recipes);
   });
   tag.appendChild(deleteButton);
 
   // Ajoutez le tag à votre conteneur de tags
   tagContainer.appendChild(tag);
+  const ustensilsList = document.getElementById("container_ustensils");
+  const p = document.createElement("p");
+  p.classList.add("ustensil_item");
+  p.textContent = ustensil;
+  ustensilsList.insertBefore(p, ustensilsList.firstChild);
 }

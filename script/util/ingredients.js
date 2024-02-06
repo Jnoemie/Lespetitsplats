@@ -7,16 +7,16 @@ function renderIngredients(dataRecette) {
     recipe.ingredients.forEach((ingr) => {
       if (!ingredients.includes(ingr.ingredient)) {
         ingredients.push(ingr.ingredient);
-        const li = document.createElement("LI");
-        li.classList.add("ingredients_item");
-        li.textContent = ingr.ingredient;
-        ingredientsList.appendChild(li);
+        const p = document.createElement("p");
+        p.classList.add("ingredients_item");
+        p.textContent = ingr.ingredient;
+        ingredientsList.appendChild(p);
 
-        li.addEventListener("click", (event) => {
+        p.addEventListener("click", (event) => {
           const ingredient = event.target.innerText;
           if (!isTagExistIngredient(ingredient)) {
             updateList("ingredients", ingredient);
-            addTag(ingredient);
+            addIngredientTag(ingredient);
           }
         });
       }
@@ -39,7 +39,7 @@ function isTagExistIngredient(ingredient) {
   return false;
 }
 
-function addTag(ingredient) {
+function addIngredientTag(ingredient) {
   const tagContainer = document.getElementById("tags_container");
 
   // Créez un élément de tag
@@ -54,20 +54,24 @@ function addTag(ingredient) {
   // Bouton de suppression du tag
   const deleteButton = document.createElement("button");
   deleteButton.textContent = "X";
-  deleteButton.addEventListener("click", () => {
+  deleteButton.addEventListener("click", function () {
     // Supprimer le tag du DOM
     tagContainer.removeChild(tag);
-    // Supprimer l'appareil du tableau search_appareil
+    // Supprimer l'ingrédient du tableau search_ingredients
     const index = search_ingredients.indexOf(ingredient);
 
     if (index !== -1) {
       search_ingredients.splice(index, 1);
+      searchRecipes(recipes);
     }
-
-    searchRecipes(recipes);
   });
   tag.appendChild(deleteButton);
 
   // Ajoutez le tag à votre conteneur de tags
   tagContainer.appendChild(tag);
+  const ingredientsList = document.getElementById("container_ingredients");
+  const p = document.createElement("p");
+  p.classList.add("ingredients_item");
+  p.textContent = ingredient;
+  ingredientsList.insertBefore(p, ingredientsList.firstChild);
 }

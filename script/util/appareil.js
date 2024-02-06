@@ -6,16 +6,16 @@ function renderAppareils(dataRecette) {
   dataRecette.forEach((recipe) => {
     if (recipe.appliance != "" && !appareil.includes(recipe.appliance)) {
       appareil.push(recipe.appliance);
-      const li = document.createElement("LI");
-      li.classList.add("appareils_item");
-      li.textContent = recipe.appliance;
-      appareilList.appendChild(li);
+      const p = document.createElement("p");
+      p.classList.add("appareils_item");
+      p.textContent = recipe.appliance;
+      appareilList.appendChild(p);
 
-      li.addEventListener("click", (event) => {
+      p.addEventListener("click", (event) => {
         const appareils = event.target.innerText;
         if (!isTagExistAppareil(appareils)) {
           updateList("appareils", appareils);
-          addTag(appareils);
+          addAppareilTag(appareils);
         }
       });
     }
@@ -35,8 +35,8 @@ function isTagExistAppareil(appareils) {
   }
   return false;
 }
-//Gère l'action lorsqu'un utilisateur clique sur un appareil pour le sélectionner comme filtre.
-function addTag(appareil) {
+// Gère l'action lorsqu'un utilisateur clique sur un appareil pour le sélectionner comme filtre.
+function addAppareilTag(appareil) {
   const tagContainer = document.getElementById("tags_container");
 
   // Créez un élément de tag
@@ -51,7 +51,7 @@ function addTag(appareil) {
   // Bouton de suppression du tag
   const deleteButton = document.createElement("button");
   deleteButton.textContent = "X";
-  deleteButton.addEventListener("click", () => {
+  deleteButton.addEventListener("click", function () {
     // Supprimer le tag du DOM
     tagContainer.removeChild(tag);
     // Supprimer l'appareil du tableau search_appareil
@@ -59,12 +59,16 @@ function addTag(appareil) {
 
     if (index !== -1) {
       search_appareil.splice(index, 1);
+      searchRecipes(recipes);
     }
-
-    searchRecipes(recipes);
   });
   tag.appendChild(deleteButton);
 
   // Ajoutez le tag à votre conteneur de tags
   tagContainer.appendChild(tag);
+  const appareilsList = document.getElementById("container_appareils");
+  const p = document.createElement("p");
+  p.classList.add("appareil_item");
+  p.textContent = appareil;
+  appareilsList.insertBefore(p, appareilsList.firstChild);
 }

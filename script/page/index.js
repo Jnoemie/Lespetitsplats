@@ -11,16 +11,16 @@ const appareilSearchInput = document.getElementById("appareils_search");
 //fonction appelée plus tard pour afficher les recettes en fonction des filtres de recherche.
 async function renderRecipes(dataRecette) {
   const recetteSection = document.getElementById("section");
-  const listeRecette = document.querySelectorAll(".recipe-card")
-    const notFoundDiv = document.querySelector(".not_found");
+  const listeRecette = document.querySelectorAll(".recipe-card");
+  const notFoundDiv = document.querySelector(".not_found");
 
-  const needle = document.getElementById('field_search').value.trim();
+  const needle = document.getElementById("field_search").value.trim();
   if (listeRecette.length === 0) {
     notFoundDiv.innerHTML = `
       Aucune recette ne contient ‘${needle}’. Vous pouvez chercher « tarte aux pommes », « poisson », etc...
     `;
   } else {
-    notFoundDiv.innerHTML = '';
+    notFoundDiv.innerHTML = "";
   }
   // nettoie la liste de recherche
   document.querySelector(".listeRecettes").innerHTML = "";
@@ -48,8 +48,9 @@ async function renderRecipes(dataRecette) {
 function filterRecipes(recipes) {
   return recipes.filter((recipe) => {
     const ingredientsMatch = search_ingredients.every((ingredient) =>
-      recipe.ingredients.some((recipeIngredient) =>
-        recipeIngredient.ingredient.toLowerCase() === ingredient.toLowerCase()
+      recipe.ingredients.some(
+        (recipeIngredient) =>
+          recipeIngredient.ingredient.toLowerCase() === ingredient.toLowerCase()
       )
     );
 
@@ -83,15 +84,14 @@ function filterRecipes(recipes) {
       recipe.name.toLowerCase().includes(search_global.toLowerCase()) ||
       recipe.description.toLowerCase().includes(search_global.toLowerCase()) ||
       recipe.ingredients.some((recipeIngredient) =>
-        recipeIngredient.ingredient.toLowerCase().includes(search_global.toLowerCase())
+        recipeIngredient.ingredient
+          .toLowerCase()
+          .includes(search_global.toLowerCase())
       );
 
     return queryMatch;
   });
 }
-
-
-
 
 //Recherche les recettes en fonction des critères de recherche actuels et affiche les résultats.
 function searchRecipes(recipes) {
@@ -124,7 +124,7 @@ function initEvents() {
       search_global = inputValue;
 
       if (event.target.value.length >= 3) {
-          searchRecipes(recipes);
+        searchRecipes(recipes);
       }
     });
   initializeFiltering(
@@ -132,26 +132,25 @@ function initEvents() {
     ustensilSearchInput,
     appareilSearchInput
   );
-  document.getElementById("field_search").addEventListener("keyup", function (event) {
-    const inputValue = this.value.trim().toLowerCase();
-    search_global = inputValue;
-  
-    if (inputValue === "") {
-      searchRecipes(recipes);
-    } else if (inputValue.length >= 3) {
-      searchRecipes(recipes);
-    }
-  });
-  
+  document
+    .getElementById("field_search")
+    .addEventListener("keyup", function (event) {
+      const inputValue = this.value.trim().toLowerCase();
+      search_global = inputValue;
+
+      if (inputValue === "") {
+        searchRecipes(recipes);
+      } else if (inputValue.length >= 3) {
+        searchRecipes(recipes);
+      }
+    });
 }
 
 //fonction d'initialisation principale qui est appelée au chargement de la page pour afficher les recettes et initialiser les événements.
 
 async function init() {
-  
   renderRecipes(recipes);
   initEvents();
 }
 
 init();
-
