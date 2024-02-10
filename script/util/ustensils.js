@@ -7,12 +7,12 @@ function renderUstensiles(dataRecette) {
     recipe.ustensils.forEach((ustensil) => {
       if (!ustensils.includes(ustensil)) {
         ustensils.push(ustensil);
-        const p = document.createElement("p");
-        p.classList.add("ustensil_item");
-        p.textContent = ustensil;
-        ustensilsList.appendChild(p);
+        const li = document.createElement("LI");
+        li.classList.add("ustensil_item");
+        li.textContent = ustensil;
+        ustensilsList.appendChild(li);
 
-        p.addEventListener("click", (event) => {
+        li.addEventListener("click", (event) => {
           const ustensil = event.target.innerText;
           if (!isTagExistUstensil(ustensil)) {
             updateList("ustensils", ustensil);
@@ -70,8 +70,8 @@ function addUstensilTag(ustensil) {
   // Ajoutez le tag à votre conteneur de tags
   tagContainer.appendChild(tag);
   const ustensilsList = document.getElementById("container_ustensils");
-  const p = document.createElement("p");
-  p.classList.add("ustensil_item");
-  p.textContent = ustensil;
-  ustensilsList.insertBefore(p, ustensilsList.firstChild);
+  const li = document.createElement("LI");
+  li.classList.add("ustensil_item");
+  li.textContent = ustensil;
+  ustensilsList.insertBefore(li, ustensilsList.firstChild);
 }

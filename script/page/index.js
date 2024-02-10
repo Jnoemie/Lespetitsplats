@@ -11,11 +11,10 @@ const appareilSearchInput = document.getElementById("appareils_search");
 //fonction appelée plus tard pour afficher les recettes en fonction des filtres de recherche.
 async function renderRecipes(dataRecette) {
   const recetteSection = document.getElementById("section");
-  const listeRecette = document.querySelectorAll(".recipe-card");
   const notFoundDiv = document.querySelector(".not_found");
 
   const needle = document.getElementById("field_search").value.trim();
-  if (listeRecette.length === 0) {
+  if (dataRecette.length === 0) {
     notFoundDiv.innerHTML = `
       Aucune recette ne contient ‘${needle}’. Vous pouvez chercher « tarte aux pommes », « poisson », etc...
     `;

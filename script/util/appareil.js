@@ -6,12 +6,12 @@ function renderAppareils(dataRecette) {
   dataRecette.forEach((recipe) => {
     if (recipe.appliance != "" && !appareil.includes(recipe.appliance)) {
       appareil.push(recipe.appliance);
-      const p = document.createElement("p");
-      p.classList.add("appareils_item");
-      p.textContent = recipe.appliance;
-      appareilList.appendChild(p);
+      const li = document.createElement("LI");
+      li.classList.add("appareils_item");
+      li.textContent = recipe.appliance;
+      appareilList.appendChild(li);
 
-      p.addEventListener("click", (event) => {
+      li.addEventListener("click", (event) => {
         const appareils = event.target.innerText;
         if (!isTagExistAppareil(appareils)) {
           updateList("appareils", appareils);
@@ -67,8 +67,8 @@ function addAppareilTag(appareil) {
   // Ajoutez le tag à votre conteneur de tags
   tagContainer.appendChild(tag);
   const appareilsList = document.getElementById("container_appareils");
-  const p = document.createElement("p");
-  p.classList.add("appareil_item");
-  p.textContent = appareil;
-  appareilsList.insertBefore(p, appareilsList.firstChild);
+  const li = document.createElement("LI");
+  li.classList.add("appareil_item");
+  li.textContent = appareil;
+  appareilsList.insertBefore(li, appareilsList.firstChild);
 }
