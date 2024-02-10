@@ -9,7 +9,7 @@ function renderUstensiles(dataRecette) {
       const ustensil = recipe.ustensils[j];
       if (!ustensils.includes(ustensil)) {
         ustensils.push(ustensil);
-        const li= document.createElement("Li");
+        const li= document.createElement("LI");
         li.classList.add("ustensil_item");
         li.textContent = ustensil;
         ustensilsList.appendChild(li);
