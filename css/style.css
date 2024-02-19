@@ -465,3 +465,6 @@ ul{
   color: grey;
   opacity: .5;
 }
+.hidden {
+  display: none;
+}
