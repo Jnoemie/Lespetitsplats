@@ -77,16 +77,16 @@ const clearIconAppareils = appareilsSearchInput.nextElementSibling; // Présuman
 
 function toggleClearIconForAppareils() {
   if (appareilsSearchInput.value) {
-    clearIconAppareils.classList.remove('hidden');
+    clearIconAppareils.classList.remove("hidden");
   } else {
-    clearIconAppareils.classList.add('hidden');
+    clearIconAppareils.classList.add("hidden");
   }
 }
 
-appareilsSearchInput.addEventListener('input', toggleClearIconForAppareils);
+appareilsSearchInput.addEventListener("input", toggleClearIconForAppareils);
 
-clearIconAppareils.addEventListener('click', () => {
-  appareilsSearchInput.value = ''; // Efface le contenu du champ de recherche
+clearIconAppareils.addEventListener("click", () => {
+  appareilsSearchInput.value = ""; // Efface le contenu du champ de recherche
   toggleClearIconForAppareils(); // Cache la croix
   // Réinitialisez votre recherche d'ingrédients ici et mettez à jour l'affichage
   search_appareil = []; // Si vous souhaitez réinitialiser les filtres d'Appareils

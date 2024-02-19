@@ -80,16 +80,16 @@ const clearIconIngredients = ingredientsSearchInput.nextElementSibling; // Prés
 
 function toggleClearIconForIngredients() {
   if (ingredientsSearchInput.value) {
-    clearIconIngredients.classList.remove('hidden');
+    clearIconIngredients.classList.remove("hidden");
   } else {
-    clearIconIngredients.classList.add('hidden');
+    clearIconIngredients.classList.add("hidden");
   }
 }
 
-ingredientsSearchInput.addEventListener('input', toggleClearIconForIngredients);
+ingredientsSearchInput.addEventListener("input", toggleClearIconForIngredients);
 
-clearIconIngredients.addEventListener('click', () => {
-  ingredientsSearchInput.value = ''; // Efface le contenu du champ de recherche
+clearIconIngredients.addEventListener("click", () => {
+  ingredientsSearchInput.value = ""; // Efface le contenu du champ de recherche
   toggleClearIconForIngredients(); // Cache la croix
   // Réinitialisez votre recherche d'ingrédients ici et mettez à jour l'affichage
   search_ingredients = []; // Si vous souhaitez réinitialiser les filtres d'ingrédients

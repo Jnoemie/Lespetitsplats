@@ -17,8 +17,8 @@ function initializeFiltering(ingredientInput, ustensilInput, appareilInput) {
   function filterList(containerId, query) {
     const container = document.getElementById(containerId);
     const items = Array.from(container.getElementsByTagName("LI")); // Convertir en tableau pour utiliser forEach
-  
-    items.forEach(item => {
+
+    items.forEach((item) => {
       const itemName = item.textContent.toLowerCase();
       item.style.display = itemName.includes(query) ? "block" : "none";
     });
