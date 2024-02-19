@@ -1,453 +1,435 @@
-@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Manrope&display=swap');
-
-
-
-
+@import url("https://fonts.googleapis.com/css2?family=Anton&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Manrope&display=swap");
 
 body {
-    max-width: 1440px;
-    background-color:lightgrey;
-    font-family: 'Anton', sans-serif;
-    margin: auto;
-  }
+  max-width: 1440px;
+  background-color: lightgrey;
+  font-family: "Anton", sans-serif;
+  margin: auto;
+}
 header {
-    background-image: url(../assets/header.png);
-    object-fit: cover;
-    width: 100%;
-    height: 667px;
-    margin-bottom: 2rem;
-  }
-  header img {
-    margin: 3rem 0 9rem 3rem;
-  }
-  header input {
-    width: 90%;
-  
-    border-radius: 1rem;
-    padding: 2rem;
-    margin: auto;
-    font-size: 1rem;
-    font-family: 'Manrope', sans-serif;
-    display: block;
-  }
-  .search {
-    position: relative;
-    display :flex;
-    width: 100%;
-    height: 72px;
-  }
-  .search i{
-position: absolute;
-right: 6.8rem;
-top :30px;
-color: #7A7A7A;
-  }
-  .search img {
-    margin: 0;
-    padding: 0;
-    position: absolute;
-    right: 2.8rem;
-    top: .9rem;
-    cursor: pointer;
-  }
-  header h1 {
-    color: #ffd15b;
-    font-size: 41px;
-    font-weight: 700;
-    width: 950px;
-    height:152px;
-   margin:auto;
+  background-image: url(../assets/header.png);
+  object-fit: cover;
+  width: 100%;
+  height: 667px;
+  margin-bottom: 2rem;
+}
+header img {
+  margin: 3rem 0 9rem 3rem;
+}
+header input {
+  width: 90%;
+
+  border-radius: 1rem;
+  padding: 2rem;
+  margin: auto;
+  font-size: 1rem;
+  font-family: "Manrope", sans-serif;
+  display: block;
+}
+.search {
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 72px;
+}
+.search i {
+  position: absolute;
+  right: 6.8rem;
+  top: 30px;
+  color: #7a7a7a;
+}
+.search img {
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  right: 2.8rem;
+  top: 0.9rem;
+  cursor: pointer;
+}
+header h1 {
+  color: #ffd15b;
+  font-size: 41px;
+  font-weight: 700;
+  width: 950px;
+  height: 152px;
+  margin: auto;
   text-align: center;
   line-height: 66.24px;
- font-family:'Anton';
- text-transform: uppercase;
+  font-family: "Anton";
+  text-transform: uppercase;
+}
+.filtres {
+  display: flex;
+  flex-direction: column;
+  margin-left: 90px;
+}
 
+.filtre_selection {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
 
-  
-  }
-  .filtres {
-    display: flex;
-    flex-direction: column;
-    margin-left: 90px;
-  }
-  
-  .filtre_selection {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 1rem;
-  }
-  
-  
+.tag {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+  background-color: #ffd15b;
+  border-radius: 0.5rem;
+  min-width: 145px;
+  font-family: "Manrope", sans-serif;
+}
+.tag button {
+  margin-left: 6px;
+  margin-top: 4px;
+  background-color: transparent;
+  border-color: transparent;
+}
 
+#tags_container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.xmark {
+  margin-left: 0.5rem;
+  cursor: pointer;
+}
 
-  .tag {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: .5rem .5rem .5rem .5rem;
-    background-color: #FFD15B;
-    border-radius: .5rem;
-    min-width: 145px;
-    font-family:'Manrope', sans-serif; ;
-  }
-  .tag button{
-    margin-left: 6px;
-    margin-top:4px ;
-    background-color: transparent;
-    border-color: transparent;
-  }
-  
-  #tags_container{
-    display: flex;
-    flex-wrap: wrap;
-    gap:10px;
-  }
-  .xmark {
-    margin-left: .5rem;
-    cursor: pointer;
-  }
-  
-  
-  .selections {
-    display: flex;
-    gap: 2rem;
-    width: 34rem;
-  }
-  
-  .ingredients {
-    position: relative;
-    width: 10rem;
-  }
-  
-  .appareils {
-    position: relative;
-    width: 10rem;
-  }
-  
-  .ustensils {
-    position: relative;
-    width: 10rem;
-  }
-  
-  .chevron_down_ingredients {
-    position: absolute;
-    right: .6rem;
-    top: 1rem;
-  }
-  
-  .chevron_down_appareils {
-    position: absolute;
-    right: .6rem;
-    top: 1rem;
-  }
-  
-  .chevron_down_ustensils {
-    position: absolute;
-    right: .6rem;
-    top: 1rem;
-  }
-  
-  .chevron_up_ingredients {
-    display: none;
-    position: absolute;
-    right: .6rem;
-    top: 1rem;
-  }
-  
-  .chevron_up_appareils {
-    display: none;
-    position: absolute;
-    right: .6rem;
-    top: 1rem;
-  }
-  
-  .chevron_up_ustensils {
-    display: none;
-    position: absolute;
-    right: .6rem;
-    top: 1rem;
-  }
-  
-  .dropdown_btn {
-    width: 10rem;
-    height: 3rem;
-    text-align: left;
-    padding-inline: 1rem;
-    border-radius: .5rem;
-    border-style: none;
-    background-color: white;
-    cursor: pointer;
-  }
-  
-  .filtre_ingredients {
-    display: none;
-    font-family: 'Manrope', sans-serif;
-    font-size:16px;
-    width: 10rem;
-    position: absolute;
-    background-color: white;
-    padding-top: .2rem;
-    border-radius: .5rem;
-    top: 2rem;
-    z-index: 2;
-  }
-  
-  .filtre_ingredients li {
-    margin: 0 ;
-    padding: 1px 8px;
-  }
-  
-  .filtre_ingredients li:hover {
-    background-color: #FFD15B;
-    font-weight: 700;
-    cursor: pointer;
-  }
-  
-  #container_ingredients {
-    max-height: 16rem;
-    overflow-y: auto;
-    list-style-type: none;  
+.selections {
+  display: flex;
+  gap: 2rem;
+  width: 34rem;
+}
+
+.ingredients {
+  position: relative;
+  width: 10rem;
+}
+
+.appareils {
+  position: relative;
+  width: 10rem;
+}
+
+.ustensils {
+  position: relative;
+  width: 10rem;
+}
+
+.chevron_down_ingredients {
+  position: absolute;
+  right: 0.6rem;
+  top: 1rem;
+}
+
+.chevron_down_appareils {
+  position: absolute;
+  right: 0.6rem;
+  top: 1rem;
+}
+
+.chevron_down_ustensils {
+  position: absolute;
+  right: 0.6rem;
+  top: 1rem;
+}
+
+.chevron_up_ingredients {
+  display: none;
+  position: absolute;
+  right: 0.6rem;
+  top: 1rem;
+}
+
+.chevron_up_appareils {
+  display: none;
+  position: absolute;
+  right: 0.6rem;
+  top: 1rem;
+}
+
+.chevron_up_ustensils {
+  display: none;
+  position: absolute;
+  right: 0.6rem;
+  top: 1rem;
+}
+
+.dropdown_btn {
+  width: 10rem;
+  height: 3rem;
+  text-align: left;
+  padding-inline: 1rem;
+  border-radius: 0.5rem;
+  border-style: none;
+  background-color: white;
+  cursor: pointer;
+}
+
+.filtre_ingredients {
+  display: none;
+  font-family: "Manrope", sans-serif;
+  font-size: 16px;
+  width: 10rem;
+  position: absolute;
+  background-color: white;
+  padding-top: 0.2rem;
+  border-radius: 0.5rem;
+  top: 2rem;
+  z-index: 2;
+}
+
+.filtre_ingredients li {
+  margin: 0;
+  padding: 1px 8px;
+}
+
+.filtre_ingredients li:hover {
+  background-color: #ffd15b;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+#container_ingredients {
+  max-height: 16rem;
+  overflow-y: auto;
+  list-style-type: none;
   padding: 0;
   margin: 0;
-  display:flex;
+  display: flex;
   flex-direction: column;
-  gap:2px;
+  gap: 2px;
   font-size: 16px;
   font-weight: 400;
-  font-family: 'Manrope';
-    
-  }
-  
-  .filtre_appareils {
-    display: none;
-    font-family: 'Manrope', sans-serif;
-    font-size: 16px;
-    width: 10rem;
-    position: absolute;
-    background-color: white;
-    padding-top: .2rem;
-    border-radius: .5rem;
-    top: 2rem;
-    z-index: 2;
-  }
-  
-  .filtre_appareils li {
-    margin: 0 ;
-    padding: 1px 8px;
-  }
-  
-  .filtre_appareils li:hover {
-    background-color: #FFD15B;
-    font-weight: 700;
-    cursor: pointer;
-  }
-  
-  #container_appareils {
-    max-height: 16rem;
-    overflow-y: auto;
-    list-style-type: none;  
-  padding: 0;
-  margin: 0;
-  display:flex;
-  flex-direction: column;
-  gap:2px;
-  font-size: 16px;
-  font-weight: 400;
-  font-family: 'Manrope';
-  }
-  
-  .filtre_ustensils {
-    display: none;
-    font-family: 'Manrope', sans-serif;
-    font-size: 16px;
-    width: 10rem;
-    position: absolute;
-    background-color: white ;
-    padding-top: .2rem;
-    border-radius: .5rem;
-    top: 2rem;
-    z-index: 2;
-  }
-  
-  .filtre_ustensils li {
-    margin: 0 ;
-    padding: 1px 8px;
-  }
-  
-  .filtre_ustensils li:hover {
-    background-color: #FFD15B;
-    font-weight: 700;
-    cursor: pointer;
-  }
-  
-  #container_ustensils {
-    max-height: 16rem;
-    overflow-y: auto;
-    list-style-type: none;  
-  padding: 0;
-  margin: 0;
-  display:flex;
-  flex-direction: column;
-  gap:2px;
-  font-size: 16px;
-  font-weight: 400;
-  font-family: 'Manrope';
-  }
-  
-  #ingredients_search {
-    display: block;
-    width: 9rem;
-    height: 2rem;
-    margin: 1rem auto 0 auto;
-    border: .15rem #7A7A7A solid;
-    border-radius: .2rem;
-  }
-  
-  #appareils_search {
-    display: block;
-    width: 9rem;
-    height: 2rem;
-    margin: 1rem auto 0 auto;
-    border: .15rem #7A7A7A solid;
-    border-radius: .2rem;
-  }
-  
-  #ustensils_search {
-    display: block;
-    width: 9rem;
-    height: 2rem;
-    margin: 1rem auto 0 auto;
-    border: .15rem  #7A7A7A solid;
-    border-radius: .2rem;
-  }
-  
-  .magnifying_glass {
-    position: relative;
-    top: -28px;
-    left: 133px;
-    opacity: .3;
-  }
-  
-  .recipe-card {
-    position: relative;
-    width: 380px;
-    height: 781px;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    background-color: white;
-    border-radius: 25px;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    transform: scale(1);
-    transition: all 0.3s;
-  }
-  .recipe-card:hover {
-    cursor: pointer;
-    transform: scale(1.03);
-  }
-  .recipe-time {
-    position: absolute;
-    right: 0;
-    top: 0;
-    background-color: #FFD15B;
-    border-radius: 25px;
-    padding: 5px 20px;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    margin: 20px;
-    font-size: 13px;
-  }
-  .recipe-image {
-    width: 100%;
-    height: 250px;
-    -o-object-fit: cover;
-       object-fit: cover;
-  }
-  .recipe-section {
-    padding: 20px;
-    display:flex;
-    flex-direction: column;
-    height: 505px;
-  }
-  .recipe-section h2 {
-    font-weight: 600;
-    font-size: 20px;
+  font-family: "Manrope";
+}
 
-  }
-  .recipe-section h3 {
-    color: #7A7A7A;
-    font-weight: 500;
-    font-size: 15px;
-    text-transform: uppercase;
-    margin: 12px 0;
-  }
-  .recipe-description {
-    height:133px;
-    font-weight: 100;
-    font-size: 16px;
-    overflow: hidden;
-    font-family:'Manrope';
-  
-  }
-  .recipe-titleIngredients {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-  }
-  .recipe-ingredient {
-    display: flex;
-    flex-direction: column;
-    font-family:'Manrope';
-  }
-  .recipe-ingredient h4 {
-    font-weight: 600;
-    font-size: 15px;
-    margin: 12px 0;
-  }
-  .recipe-ingredient span {
-    color: #7A7A7A;
-    font-weight: 400;
-    font-size: 15px;
-  
-  }
-  .listeRecettes {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap:57px;
-    margin-top: 50px;
-    
-  }
-  #nbr_recettes{
-    width: 190px;
-    height:32px;
-    font-weight: 600;
+.filtre_appareils {
+  display: none;
+  font-family: "Manrope", sans-serif;
+  font-size: 16px;
+  width: 10rem;
+  position: absolute;
+  background-color: white;
+  padding-top: 0.2rem;
+  border-radius: 0.5rem;
+  top: 2rem;
+  z-index: 2;
+}
+
+.filtre_appareils li {
+  margin: 0;
+  padding: 1px 8px;
+}
+
+.filtre_appareils li:hover {
+  background-color: #ffd15b;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+#container_appareils {
+  max-height: 16rem;
+  overflow-y: auto;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 16px;
+  font-weight: 400;
+  font-family: "Manrope";
+}
+
+.filtre_ustensils {
+  display: none;
+  font-family: "Manrope", sans-serif;
+  font-size: 16px;
+  width: 10rem;
+  position: absolute;
+  background-color: white;
+  padding-top: 0.2rem;
+  border-radius: 0.5rem;
+  top: 2rem;
+  z-index: 2;
+}
+
+.filtre_ustensils li {
+  margin: 0;
+  padding: 1px 8px;
+}
+
+.filtre_ustensils li:hover {
+  background-color: #ffd15b;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+#container_ustensils {
+  max-height: 16rem;
+  overflow-y: auto;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 16px;
+  font-weight: 400;
+  font-family: "Manrope";
+}
+
+#ingredients_search {
+  display: block;
+  width: 9rem;
+  height: 2rem;
+  margin: 1rem auto 0 auto;
+  border: 0.15rem #7a7a7a solid;
+  border-radius: 0.2rem;
+}
+
+#appareils_search {
+  display: block;
+  width: 9rem;
+  height: 2rem;
+  margin: 1rem auto 0 auto;
+  border: 0.15rem #7a7a7a solid;
+  border-radius: 0.2rem;
+}
+
+#ustensils_search {
+  display: block;
+  width: 9rem;
+  height: 2rem;
+  margin: 1rem auto 0 auto;
+  border: 0.15rem #7a7a7a solid;
+  border-radius: 0.2rem;
+}
+
+.magnifying_glass {
+  position: relative;
+  top: -28px;
+  left: 133px;
+  opacity: 0.3;
+}
+
+.recipe-card {
+  position: relative;
+  width: 380px;
+  height: 781px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  border-radius: 25px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  transform: scale(1);
+  transition: all 0.3s;
+}
+.recipe-card:hover {
+  cursor: pointer;
+  transform: scale(1.03);
+}
+.recipe-time {
+  position: absolute;
+  right: 0;
+  top: 0;
+  background-color: #ffd15b;
+  border-radius: 25px;
+  padding: 5px 20px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  margin: 20px;
+  font-size: 13px;
+}
+.recipe-image {
+  width: 100%;
+  height: 250px;
+  -o-object-fit: cover;
+  object-fit: cover;
+}
+.recipe-section {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  height: 505px;
+}
+.recipe-section h2 {
+  font-weight: 600;
+  font-size: 20px;
+}
+.recipe-section h3 {
+  color: #7a7a7a;
+  font-weight: 500;
+  font-size: 15px;
+  text-transform: uppercase;
+  margin: 12px 0;
+}
+.recipe-description {
+  height: 133px;
+  font-weight: 100;
+  font-size: 16px;
+  overflow: hidden;
+  font-family: "Manrope";
+}
+.recipe-titleIngredients {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.recipe-ingredient {
+  display: flex;
+  flex-direction: column;
+  font-family: "Manrope";
+}
+.recipe-ingredient h4 {
+  font-weight: 600;
+  font-size: 15px;
+  margin: 12px 0;
+}
+.recipe-ingredient span {
+  color: #7a7a7a;
+  font-weight: 400;
+  font-size: 15px;
+}
+.listeRecettes {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 57px;
+  margin-top: 50px;
+}
+#nbr_recettes {
+  width: 190px;
+  height: 32px;
+  font-weight: 600;
   font-size: 21px;
   line-height: 47px;
-
-
-  }
-  #not_found {
-    font-size: .9rem;
-    font-weight: 600;
-    font-family: 'Manrope', sans-serif;
-  }
-  
-input:focus-visible{
-  outline:grey;
 }
-ul{
+#not_found {
+  font-size: 0.9rem;
+  font-weight: 600;
+  font-family: "Manrope", sans-serif;
+}
+
+input:focus-visible {
+  outline: grey;
+}
+ul {
   list-style-type: none;
-  padding :0;
-  margin:0;
+  padding: 0;
+  margin: 0;
 }
-.filtre_ingredients i{
+.filtre_ingredients i {
   position: absolute;
-    top: 30px;
-    left: 113px;
-    font-size: 15px;
-    color: grey;
-    opacity: .5;
+  top: 30px;
+  left: 113px;
+  font-size: 15px;
+  color: grey;
+  opacity: 0.5;
 }
 .filtre_appareils i {
   position: absolute;
@@ -455,15 +437,15 @@ ul{
   left: 113px;
   font-size: 15px;
   color: grey;
-  opacity: .5;
+  opacity: 0.5;
 }
-.filtre_ustensils i{
+.filtre_ustensils i {
   position: absolute;
   top: 30px;
   left: 113px;
   font-size: 15px;
   color: grey;
-  opacity: .5;
+  opacity: 0.5;
 }
 .hidden {
   display: none;

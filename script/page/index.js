@@ -45,8 +45,6 @@ async function renderRecipes(dataRecette) {
   updateRecipeCount();
 }
 
-
-
 //Filtre les recettes en fonction des critères de recherche.
 function filterRecipes(recipes) {
   let results = [];
@@ -180,7 +178,7 @@ function initEvents() {
     ustensilSearchInput,
     appareilSearchInput
   );
-  
+
   document
     .getElementById("field_search")
     .addEventListener("keyup", function (event) {
@@ -194,29 +192,29 @@ function initEvents() {
       }
     });
 
-    document.addEventListener('DOMContentLoaded', () => {
-      const searchInput = document.getElementById('field_search');
-      const clearIcon = document.querySelector('.fa-x');
-    
-      function toggleClearIcon() {
-        if (searchInput.value) {
-          clearIcon.classList.remove('hidden');
-        } else {
-          clearIcon.classList.add('hidden');
-        }
+  document.addEventListener("DOMContentLoaded", () => {
+    const searchInput = document.getElementById("field_search");
+    const clearIcon = document.querySelector(".fa-x");
+
+    function toggleClearIcon() {
+      if (searchInput.value) {
+        clearIcon.classList.remove("hidden");
+      } else {
+        clearIcon.classList.add("hidden");
       }
-    
-      searchInput.addEventListener('input', toggleClearIcon);
-    
-      clearIcon.addEventListener('click', () => {
-        searchInput.value = '';
-        toggleClearIcon();
-        search_global = ''; // Réinitialisez la variable de recherche globale
-        searchRecipes(recipes); // Mettez à jour l'affichage des recettes
-      });
-    
+    }
+
+    searchInput.addEventListener("input", toggleClearIcon);
+
+    clearIcon.addEventListener("click", () => {
+      searchInput.value = "";
       toggleClearIcon();
+      search_global = ""; // Réinitialisez la variable de recherche globale
+      searchRecipes(recipes); // Mettez à jour l'affichage des recettes
     });
+
+    toggleClearIcon();
+  });
 }
 
 //fonction d'initialisation principale qui est appelée au chargement de la page pour afficher les recettes et initialiser les événements.
