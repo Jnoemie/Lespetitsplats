@@ -22,7 +22,7 @@ header {
     margin: 3rem 0 9rem 3rem;
   }
   header input {
-    width: 100%;
+    width: 90%;
   
     border-radius: 1rem;
     padding: 2rem;
@@ -34,16 +34,20 @@ header {
   .search {
     position: relative;
     display :flex;
-    left:243px;
-    width: 954px;
+    width: 100%;
     height: 72px;
   }
-  
+  .search i{
+position: absolute;
+right: 6.8rem;
+top :30px;
+color: #7A7A7A;
+  }
   .search img {
     margin: 0;
     padding: 0;
     position: absolute;
-    right: .8rem;
+    right: 2.8rem;
     top: .9rem;
     cursor: pointer;
   }
@@ -320,8 +324,8 @@ header {
   
   .magnifying_glass {
     position: relative;
-    top: -1.7rem;
-    left: 8rem;
+    top: -28px;
+    left: 133px;
     opacity: .3;
   }
   
@@ -437,28 +441,27 @@ ul{
   padding :0;
   margin:0;
 }
-.search-clear {
+.filtre_ingredients i{
   position: absolute;
-  right: 35px; /* Ajustez selon votre mise en page */
-  top: 50%;
-  transform: translateY(-50%);
-  cursor: pointer;
-  color: #ccc; /* Gris */
-  font-size: 18px; /* Taille de la croix */
+    top: 30px;
+    left: 113px;
+    font-size: 15px;
+    color: grey;
+    opacity: .5;
 }
-/* Cache la croix par défaut */
-.search-clear {
- 
+.filtre_appareils i {
   position: absolute;
-  right: 70px;;
-  top: 50%;
-  transform: translateY(-50%);
-  cursor: pointer;
-  color: #ccc;
-  font-size: 18px;
+  top: 30px;
+  left: 113px;
+  font-size: 15px;
+  color: grey;
+  opacity: .5;
 }
-
-/* Classe pour afficher la croix */
-.search-clear.show {
-  display: inline; /* Affiche la croix quand du texte est entré */
+.filtre_ustensils i{
+  position: absolute;
+  top: 30px;
+  left: 113px;
+  font-size: 15px;
+  color: grey;
+  opacity: .5;
 }
