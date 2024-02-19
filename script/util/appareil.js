@@ -88,7 +88,5 @@ appareilsSearchInput.addEventListener("input", toggleClearIconForAppareils);
 clearIconAppareils.addEventListener("click", () => {
   appareilsSearchInput.value = ""; // Efface le contenu du champ de recherche
   toggleClearIconForAppareils(); // Cache la croix
-  // Réinitialisez votre recherche d'ingrédients ici et mettez à jour l'affichage
-  search_appareil = []; // Si vous souhaitez réinitialiser les filtres d'Appareils
   searchRecipes(recipes); // Mettez à jour les recettes affichées selon les filtres actuels
 });

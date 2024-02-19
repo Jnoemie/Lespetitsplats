@@ -91,7 +91,5 @@ ingredientsSearchInput.addEventListener("input", toggleClearIconForIngredients);
 clearIconIngredients.addEventListener("click", () => {
   ingredientsSearchInput.value = ""; // Efface le contenu du champ de recherche
   toggleClearIconForIngredients(); // Cache la croix
-  // Réinitialisez votre recherche d'ingrédients ici et mettez à jour l'affichage
-  search_ingredients = []; // Si vous souhaitez réinitialiser les filtres d'ingrédients
   searchRecipes(recipes); // Mettez à jour les recettes affichées selon les filtres actuels
 });
