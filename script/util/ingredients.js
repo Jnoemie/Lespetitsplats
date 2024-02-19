@@ -75,3 +75,23 @@ function addIngredientTag(ingredient) {
   li.textContent = ingredient;
   ingredientsList.insertBefore(li, ingredientsList.firstChild);
 }
+const ingredientsSearchInput = document.getElementById("ingredients_search");
+const clearIconIngredients = ingredientsSearchInput.nextElementSibling; // Présumant que la croix est juste après l'input dans le DOM
+
+function toggleClearIconForIngredients() {
+  if (ingredientsSearchInput.value) {
+    clearIconIngredients.classList.remove('hidden');
+  } else {
+    clearIconIngredients.classList.add('hidden');
+  }
+}
+
+ingredientsSearchInput.addEventListener('input', toggleClearIconForIngredients);
+
+clearIconIngredients.addEventListener('click', () => {
+  ingredientsSearchInput.value = ''; // Efface le contenu du champ de recherche
+  toggleClearIconForIngredients(); // Cache la croix
+  // Réinitialisez votre recherche d'ingrédients ici et mettez à jour l'affichage
+  search_ingredients = []; // Si vous souhaitez réinitialiser les filtres d'ingrédients
+  searchRecipes(recipes); // Mettez à jour les recettes affichées selon les filtres actuels
+});
