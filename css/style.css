@@ -437,3 +437,28 @@ ul{
   padding :0;
   margin:0;
 }
+.search-clear {
+  position: absolute;
+  right: 35px; /* Ajustez selon votre mise en page */
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #ccc; /* Gris */
+  font-size: 18px; /* Taille de la croix */
+}
+/* Cache la croix par défaut */
+.search-clear {
+ 
+  position: absolute;
+  right: 70px;;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #ccc;
+  font-size: 18px;
+}
+
+/* Classe pour afficher la croix */
+.search-clear.show {
+  display: inline; /* Affiche la croix quand du texte est entré */
+}

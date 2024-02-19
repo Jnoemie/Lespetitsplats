@@ -180,6 +180,7 @@ function initEvents() {
     ustensilSearchInput,
     appareilSearchInput
   );
+  
   document
     .getElementById("field_search")
     .addEventListener("keyup", function (event) {
