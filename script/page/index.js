@@ -9,12 +9,12 @@ const ustensilSearchInput = document.getElementById("ustensils_search");
 const appareilSearchInput = document.getElementById("appareils_search");
 
 //fonction appelée plus tard pour afficher les recettes en fonction des filtres de recherche.
-async function renderRecipes(dataRecette) {
+async function renderRecipes(recipes) {
   const recetteSection = document.getElementById("section");
   const notFoundDiv = document.querySelector(".not_found");
 
   const needle = document.getElementById("field_search").value.trim();
-  if (dataRecette.length === 0) {
+  if (recipes.length === 0) {
     notFoundDiv.innerHTML = `
       Aucune recette ne contient ‘${needle}’. Vous pouvez chercher « tarte aux pommes », « poisson », etc...
     `;
@@ -28,13 +28,13 @@ async function renderRecipes(dataRecette) {
   document.getElementById("container_ustensils").innerHTML = "";
   document.getElementById("container_appareils").innerHTML = "";
   // Traite les appareils
-  renderAppareils(dataRecette);
+  renderAppareils(recipes);
   // Traite les ustensiles
-  renderUstensiles(dataRecette);
+  renderUstensiles(recipes);
   // Traite les ingrédients
-  renderIngredients(dataRecette);
+  renderIngredients(recipes);
 
-  dataRecette.forEach((recipe) => {
+  recipes.forEach((recipe) => {
     const modelRecette = recetteFactory(recipe);
     const recetteCardDom = modelRecette.getFicheRecette();
     recetteSection.appendChild(recetteCardDom);

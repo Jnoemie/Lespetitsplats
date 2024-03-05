@@ -449,3 +449,12 @@ ul {
 .hidden {
   display: none;
 }
+.ingredients_item.non_selectable {
+  color: #aaa; /* Griser le texte pour indiquer qu'il n'est plus sélectionnable */
+  pointer-events: none; /* Empêcher les clics sur cet élément */
+}
+
+.ingredients_item.selected {
+  pointer-events: none; /* Désactive les événements de clic */
+  opacity: 0.5; /* Rend l'élément partiellement transparent pour indiquer qu'il est désactivé */
+}

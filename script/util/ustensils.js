@@ -1,9 +1,8 @@
 // Fonction pour traiter les ustensiles
-function renderUstensiles(dataRecette) {
+function renderUstensiles(recipes) {
   const ustensilsList = document.getElementById("container_ustensils");
   let ustensils = [];
-
-  dataRecette.forEach((recipe) => {
+  recipes.forEach((recipe) => {
     recipe.ustensils.forEach((ustensil) => {
       if (!ustensils.includes(ustensil)) {
         ustensils.push(ustensil);

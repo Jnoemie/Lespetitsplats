@@ -1,9 +1,9 @@
 //Affiche la liste des appareils utilisés dans les recettes et ajoute des gestionnaires d'événements pour le filtrage.
-function renderAppareils(dataRecette) {
+function renderAppareils(recipes) {
   const appareilList = document.getElementById("container_appareils");
   let appareil = [];
 
-  dataRecette.forEach((recipe) => {
+  recipes.forEach((recipe) => {
     if (recipe.appliance != "" && !appareil.includes(recipe.appliance)) {
       appareil.push(recipe.appliance);
       const li = document.createElement("LI");
