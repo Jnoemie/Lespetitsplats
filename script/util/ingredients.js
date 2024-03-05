@@ -94,7 +94,7 @@ ingredientsSearchInput.addEventListener("input", toggleClearIconForIngredients);
 clearIconIngredients.addEventListener("click", () => {
   ingredientsSearchInput.value = "";
   toggleClearIconForIngredients();
-  updateRecipesDisplay(); // Mettez à jour l'affichage des recettes en fonction du champ de recherche nettoyé
+  updateList(); // Mettez à jour l'affichage des recettes en fonction du champ de recherche nettoyé
 });
 
 // Initialisez votre application en rendant les ingrédients basés sur les recettes initiales

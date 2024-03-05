@@ -30,7 +30,7 @@ async function renderRecipes(recipes) {
   // Traite les appareils
   renderAppareils(recipes);
   // Traite les ustensiles
-  renderUstensiles(recipes);
+  renderUstensils(recipes);
   // Traite les ingrédients
   renderIngredients(recipes);
 
