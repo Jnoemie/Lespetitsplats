@@ -69,7 +69,7 @@ function addAppareilTag(appareil) {
       const indexSearch = search_appareil.indexOf(appareil);
       if (indexSearch !== -1) {
         search_appareil.splice(indexSearch, 1);
-        searchRecipes(recipes); // Réactualiser l'affichage des recettes et des ingrédients
+        searchRecipes(recipes); 
       }
     });
     tag.appendChild(deleteButton);

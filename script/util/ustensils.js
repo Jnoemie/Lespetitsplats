@@ -68,12 +68,12 @@ function addUstensilTag(ustensil) {
       const index = selectedUstensils.indexOf(ustensil);
       if (index !== -1) {
         selectedUstensils.splice(index, 1);
-        // Supposons que vous avez une fonction searchRecipes pour réactualiser l'affichage des recettes
+       
       }
       const indexSearch = search_ustensil.indexOf(ustensil);
       if (indexSearch !== -1) {
         search_ustensil.splice(indexSearch, 1);
-        searchRecipes(recipes); // Réactualiser l'affichage des recettes et des ingrédients
+        searchRecipes(recipes); 
       }
     });
     tag.appendChild(deleteButton);
