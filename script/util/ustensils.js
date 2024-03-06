@@ -4,7 +4,7 @@ let selectedUstensils = []; // Tableau pour garder la trace des ustensiles séle
 function isTagExistUstensil(ustensil) {
   const tagContainer = document.getElementById("tags_container");
   const existingTags = tagContainer.querySelectorAll(".tag");
-  return Array.from(existingTags).some(tag => tag.textContent === ustensil);
+  return Array.from(existingTags).some((tag) => tag.textContent === ustensil);
 }
 
 // Fonction pour ajouter un écouteur d'événements à un élément LI pour les ustensiles
@@ -21,22 +21,23 @@ function addClickListenerToUstensilLi(li) {
 // Fonction pour traiter et afficher les ustensiles
 function renderUstensils(recipes) {
   const ustensilsList = document.getElementById("container_ustensils");
-  ustensilsList.innerHTML = ''; // Nettoie la liste avant de la remplir
+  ustensilsList.innerHTML = ""; // Nettoie la liste avant de la remplir
   let ustensils = [];
 
-  recipes.forEach(recipe => {
-    recipe.ustensils.forEach(ustensil => {
+  recipes.forEach((recipe) => {
+    recipe.ustensils.forEach((ustensil) => {
       if (!ustensils.includes(ustensil)) {
         ustensils.push(ustensil);
       }
     });
   });
 
-    // Trie les ingrédients pour mettre ceux sélectionnés en haut
-    ustensils.sort((a, b) => selectedUstensils.includes(a) ? -1 : selectedUstensils.includes(b) ? 1 : 0);
+  // Trie les ustensils pour mettre ceux sélectionnés en haut
+  ustensils.sort((a, b) =>
+    selectedUstensils.includes(a) ? -1 : selectedUstensils.includes(b) ? 1 : 0
+  );
 
-
-  ustensils.forEach(ustensil => {
+  ustensils.forEach((ustensil) => {
     const li = document.createElement("LI");
     li.classList.add("ustensil_item");
     li.textContent = ustensil;
@@ -68,14 +69,12 @@ function addUstensilTag(ustensil) {
       if (index !== -1) {
         selectedUstensils.splice(index, 1);
         // Supposons que vous avez une fonction searchRecipes pour réactualiser l'affichage des recettes
-        
       }
       const indexSearch = search_ustensil.indexOf(ustensil);
-     if (indexSearch !== -1){
-      search_ustensil.splice(indexSearch,1)
-      searchRecipes(recipes) ; // Réactualiser l'affichage des recettes et des ingrédients
-     }
-
+      if (indexSearch !== -1) {
+        search_ustensil.splice(indexSearch, 1);
+        searchRecipes(recipes); // Réactualiser l'affichage des recettes et des ingrédients
+      }
     });
     tag.appendChild(deleteButton);
     tagContainer.appendChild(tag);
@@ -96,8 +95,9 @@ ustensilsSearchInput.addEventListener("input", toggleClearIconForUstensils);
 clearIconUstensils.addEventListener("click", () => {
   ustensilsSearchInput.value = "";
   toggleClearIconForUstensils();
-  updateList(); // Mettez à jour l'affichage des recettes en fonction du champ de recherche nettoyé
+  updateList(); 
+  searchRecipes(recipes);
 });
 
-// Supposons que vous ayez déjà une liste de recettes initialisée quelque part
+
 renderUstensils(recipes); // Initialisez l'affichage des ustensiles basé sur les recettes initiales

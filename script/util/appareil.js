@@ -4,35 +4,36 @@ let selectedAppareils = []; // Tableau pour garder la trace des appareils sélec
 function isTagExistAppareil(appareil) {
   const tagContainer = document.getElementById("tags_container");
   const existingTags = tagContainer.querySelectorAll(".tag");
-  return Array.from(existingTags).some(tag => tag.textContent === appareil);
+  return Array.from(existingTags).some((tag) => tag.textContent === appareil);
 }
 // Fonction pour ajouter un écouteur d'événements à un élément LI
 function addClickListenerToAppareilLi(li) {
   li.addEventListener("click", (event) => {
-    const appareil = event.target.getAttribute('data-appareil');
-    if (!isTagExistAppareil(appareil) ) {
+    const appareil = event.target.getAttribute("data-appareil");
+    if (!isTagExistAppareil(appareil)) {
       addAppareilTag(appareil);
-      updateList("appareils",appareil); // Mise à jour de l'affichage des recettes en fonction des ingrédients sélectionnés
+      updateList("appareils", appareil); // Mise à jour de l'affichage des recettes en fonction des appareils sélectionnés
     }
   });
 }
 
-
 // Fonction pour traiter et afficher les appareils
 function renderAppareils(recipes) {
   const appareilsList = document.getElementById("container_appareils");
-  appareilsList.innerHTML = ''; // Nettoie la liste avant de la remplir
+  appareilsList.innerHTML = ""; // Nettoie la liste avant de la remplir
   let appareils = [];
 
-  recipes.forEach(recipe => {
+  recipes.forEach((recipe) => {
     if (!appareils.includes(recipe.appliance)) {
       appareils.push(recipe.appliance);
     }
   });
   // Triez les appareils pour mettre ceux sélectionnés en haut
-  appareils.sort((a, b) => selectedAppareils.includes(a) ? -1 : selectedAppareils.includes(b) ? 1 : 0);
+  appareils.sort((a, b) =>
+    selectedAppareils.includes(a) ? -1 : selectedAppareils.includes(b) ? 1 : 0
+  );
 
-  appareils.forEach(appareil => {
+  appareils.forEach((appareil) => {
     const li = document.createElement("LI");
     li.classList.add("appareil_item");
     li.setAttribute("data-appareil", appareil);
@@ -45,7 +46,6 @@ function renderAppareils(recipes) {
     appareilsList.appendChild(li);
   });
 }
-
 
 // Fonction pour ajouter un appareil en tant que tag et le marquer comme sélectionné
 function addAppareilTag(appareil) {
@@ -65,14 +65,12 @@ function addAppareilTag(appareil) {
       const index = selectedAppareils.indexOf(appareil);
       if (index !== -1) {
         selectedAppareils.splice(index, 1);
-       
       }
       const indexSearch = search_appareil.indexOf(appareil);
-     if (indexSearch !== -1){
-      search_appareil.splice(indexSearch,1)
-      searchRecipes(recipes) ; // Réactualiser l'affichage des recettes et des ingrédients
-     }
-
+      if (indexSearch !== -1) {
+        search_appareil.splice(indexSearch, 1);
+        searchRecipes(recipes); // Réactualiser l'affichage des recettes et des ingrédients
+      }
     });
     tag.appendChild(deleteButton);
     tagContainer.appendChild(tag);
@@ -93,8 +91,8 @@ appareilsSearchInput.addEventListener("input", toggleClearIconForAppareils);
 clearIconAppareils.addEventListener("click", () => {
   appareilsSearchInput.value = "";
   toggleClearIconForAppareils();
-  updateList(); // Mettez à jour l'affichage des recettes en fonction du champ de recherche nettoyé
+  updateList();
+  searchRecipes(recipes);
 });
 
-// Supposons que vous ayez déjà une liste de recettes initialisée quelque part
 renderAppareils(recipes); // Initialisez l'affichage des appareils basé sur les recettes initiales
