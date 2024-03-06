@@ -32,6 +32,10 @@ function renderUstensils(recipes) {
     });
   });
 
+    // Trie les ingrédients pour mettre ceux sélectionnés en haut
+    ustensils.sort((a, b) => selectedUstensils.includes(a) ? -1 : selectedUstensils.includes(b) ? 1 : 0);
+
+
   ustensils.forEach(ustensil => {
     const li = document.createElement("LI");
     li.classList.add("ustensil_item");
@@ -59,12 +63,19 @@ function addUstensilTag(ustensil) {
     deleteButton.textContent = "X";
     deleteButton.addEventListener("click", function () {
       tagContainer.removeChild(tag);
-      const index = search_ustensil.indexOf(ustensil);
+
+      const index = selectedUstensils.indexOf(ustensil);
       if (index !== -1) {
-        search_ustensil.splice(index, 1);
+        selectedUstensils.splice(index, 1);
         // Supposons que vous avez une fonction searchRecipes pour réactualiser l'affichage des recettes
-        searchRecipes(recipes); 
+        
       }
+      const indexSearch = search_ustensil.indexOf(ustensil);
+     if (indexSearch !== -1){
+      search_ustensil.splice(indexSearch,1)
+      searchRecipes(recipes) ; // Réactualiser l'affichage des recettes et des ingrédients
+     }
+
     });
     tag.appendChild(deleteButton);
     tagContainer.appendChild(tag);
@@ -85,7 +96,7 @@ ustensilsSearchInput.addEventListener("input", toggleClearIconForUstensils);
 clearIconUstensils.addEventListener("click", () => {
   ustensilsSearchInput.value = "";
   toggleClearIconForUstensils();
-  searchRecipes(recipes); // Mettez à jour l'affichage des recettes en fonction du champ de recherche nettoyé
+  updateList(); // Mettez à jour l'affichage des recettes en fonction du champ de recherche nettoyé
 });
 
 // Supposons que vous ayez déjà une liste de recettes initialisée quelque part

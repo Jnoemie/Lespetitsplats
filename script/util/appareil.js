@@ -62,11 +62,17 @@ function addAppareilTag(appareil) {
     deleteButton.addEventListener("click", function () {
       tagContainer.removeChild(tag);
 
-      const index = search_appareil.indexOf(appareil);
+      const index = selectedAppareils.indexOf(appareil);
       if (index !== -1) {
-        search_appareil.splice(index, 1);
-        searchRecipes(recipes); // Supposons que vous avez une fonction searchRecipes pour réactualiser l'affichage des recettes
+        selectedAppareils.splice(index, 1);
+       
       }
+      const indexSearch = search_appareil.indexOf(appareil);
+     if (indexSearch !== -1){
+      search_appareil.splice(indexSearch,1)
+      searchRecipes(recipes) ; // Réactualiser l'affichage des recettes et des ingrédients
+     }
+
     });
     tag.appendChild(deleteButton);
     tagContainer.appendChild(tag);

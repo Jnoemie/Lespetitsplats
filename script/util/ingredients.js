@@ -65,12 +65,20 @@ function addIngredientTag(ingredient) {
     {
       tagContainer.removeChild(tag);
 
-      const index = search_ingredients.indexOf(ingredient);
-
+    const index = selectedIngredients.indexOf(ingredient);
+    
       if (index !== -1) {
-        search_ingredients.splice(index, 1);
-        searchRecipes(recipes) ; // Réactualiser l'affichage des recettes et des ingrédients
+ 
+        selectedIngredients.splice(index,1);
+        
       }
+
+     const indexSearch = search_ingredients.indexOf(ingredient);
+     if (indexSearch !== -1){
+      search_ingredients.splice(indexSearch,1)
+      searchRecipes(recipes) ; // Réactualiser l'affichage des recettes et des ingrédients
+     }
+
     });
     tag.appendChild(deleteButton);
     tagContainer.appendChild(tag);
