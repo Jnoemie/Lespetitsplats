@@ -79,7 +79,7 @@ function addIngredientTag(ingredient) {
       const indexSearch = search_ingredients.indexOf(ingredient);
       if (indexSearch !== -1) {
         search_ingredients.splice(indexSearch, 1);
-        searchRecipes(recipes); // Réactualiser l'affichage des recettes et des ingrédients
+        searchRecipes(recipes); 
       }
     });
     tag.appendChild(deleteButton);
