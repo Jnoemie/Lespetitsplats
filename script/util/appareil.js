@@ -1,92 +1,94 @@
-//Affiche la liste des appareils utilisés dans les recettes et ajoute des gestionnaires d'événements pour le filtrage.
-function renderAppareils(recipes) {
-  const appareilList = document.getElementById("container_appareils");
-  let appareil = [];
+let selectedAppareils = []; // Tableau pour garder la trace des appareils sélectionnés
 
-  recipes.forEach((recipe) => {
-    if (recipe.appliance != "" && !appareil.includes(recipe.appliance)) {
-      appareil.push(recipe.appliance);
-      const li = document.createElement("LI");
-      li.classList.add("appareils_item");
-      li.textContent = recipe.appliance;
-      appareilList.appendChild(li);
-
-      li.addEventListener("click", (event) => {
-        const appareils = event.target.innerText;
-        if (!isTagExistAppareil(appareils)) {
-          updateList("appareils", appareils);
-          addAppareilTag(appareils);
-        }
-      });
-    }
-  });
-}
-//Vérifie si le tag (appareil) existe déjà dans le conteneur de tags.
-function isTagExistAppareil(appareils) {
-  // Vérifiez si le tag existe déjà dans le conteneur de tags
+// Fonction pour vérifier si un tag (appareil) existe déjà dans le conteneur de tags
+function isTagExistAppareil(appareil) {
   const tagContainer = document.getElementById("tags_container");
   const existingTags = tagContainer.querySelectorAll(".tag");
-
-  for (const existingTag of existingTags) {
-    if (existingTag.textContent === appareils) {
-      // Le tag existe déjà
-      return true;
-    }
-  }
-  return false;
+  return Array.from(existingTags).some(tag => tag.textContent === appareil);
 }
-// Gère l'action lorsqu'un utilisateur clique sur un appareil pour le sélectionner comme filtre.
-function addAppareilTag(appareil) {
-  const tagContainer = document.getElementById("tags_container");
-
-  // Créez un élément de tag
-  const tag = document.createElement("div");
-  tag.classList.add("tag"); // Ajoutez des classes CSS au tag si nécessaire
-
-  // Texte du tag
-  const tagText = document.createElement("span");
-  tagText.textContent = appareil;
-  tag.appendChild(tagText);
-
-  // Bouton de suppression du tag
-  const deleteButton = document.createElement("button");
-  deleteButton.textContent = "X";
-  deleteButton.addEventListener("click", function () {
-    // Supprimer le tag du DOM
-    tagContainer.removeChild(tag);
-    // Supprimer l'appareil du tableau search_appareil
-    const index = search_appareil.indexOf(appareil);
-
-    if (index !== -1) {
-      search_appareil.splice(index, 1);
-      searchRecipes(recipes);
+// Fonction pour ajouter un écouteur d'événements à un élément LI
+function addClickListenerToAppareilLi(li) {
+  li.addEventListener("click", (event) => {
+    const appareil = event.target.getAttribute('data-appareil');
+    if (!isTagExistAppareil(appareil) ) {
+      addAppareilTag(appareil);
+      updateList("appareils",appareil); // Mise à jour de l'affichage des recettes en fonction des ingrédients sélectionnés
     }
   });
-  tag.appendChild(deleteButton);
-
-  // Ajoutez le tag à votre conteneur de tags
-  tagContainer.appendChild(tag);
-  const appareilsList = document.getElementById("container_appareils");
-  const li = document.createElement("LI");
-  li.classList.add("appareil_item");
-  li.textContent = appareil;
-  appareilsList.insertBefore(li, appareilsList.firstChild);
 }
+
+
+// Fonction pour traiter et afficher les appareils
+function renderAppareils(recipes) {
+  const appareilsList = document.getElementById("container_appareils");
+  appareilsList.innerHTML = ''; // Nettoie la liste avant de la remplir
+  let appareils = [];
+
+  recipes.forEach(recipe => {
+    if (!appareils.includes(recipe.appliance)) {
+      appareils.push(recipe.appliance);
+    }
+  });
+  // Triez les appareils pour mettre ceux sélectionnés en haut
+  appareils.sort((a, b) => selectedAppareils.includes(a) ? -1 : selectedAppareils.includes(b) ? 1 : 0);
+
+  appareils.forEach(appareil => {
+    const li = document.createElement("LI");
+    li.classList.add("appareil_item");
+    li.setAttribute("data-appareil", appareil);
+    li.textContent = appareil;
+    if (!selectedAppareils.includes(appareil)) {
+      addClickListenerToAppareilLi(li);
+    } else {
+      li.classList.add("selected");
+    }
+    appareilsList.appendChild(li);
+  });
+}
+
+
+// Fonction pour ajouter un appareil en tant que tag et le marquer comme sélectionné
+function addAppareilTag(appareil) {
+  if (!isTagExistAppareil(appareil)) {
+    const tagContainer = document.getElementById("tags_container");
+    const tag = document.createElement("div");
+    tag.classList.add("tag");
+    const tagText = document.createElement("span");
+    tagText.textContent = appareil;
+    tag.appendChild(tagText);
+
+    const deleteButton = document.createElement("button");
+    deleteButton.textContent = "X";
+    deleteButton.addEventListener("click", function () {
+      tagContainer.removeChild(tag);
+
+      const index = search_appareil.indexOf(appareil);
+      if (index !== -1) {
+        search_appareil.splice(index, 1);
+        searchRecipes(recipes); // Supposons que vous avez une fonction searchRecipes pour réactualiser l'affichage des recettes
+      }
+    });
+    tag.appendChild(deleteButton);
+    tagContainer.appendChild(tag);
+    selectedAppareils.push(appareil);
+  }
+}
+
+// Fonctions pour le champ de recherche et le bouton d'effacement des appareils
 const appareilsSearchInput = document.getElementById("appareils_search");
-const clearIconAppareils = appareilsSearchInput.nextElementSibling; // Présumant que la croix est juste après l'input dans le DOM
+const clearIconAppareils = appareilsSearchInput.nextElementSibling;
 
 function toggleClearIconForAppareils() {
-  if (appareilsSearchInput.value) {
-    clearIconAppareils.classList.remove("hidden");
-  } else {
-    clearIconAppareils.classList.add("hidden");
-  }
+  clearIconAppareils.classList.toggle("hidden", !appareilsSearchInput.value);
 }
 
 appareilsSearchInput.addEventListener("input", toggleClearIconForAppareils);
 
 clearIconAppareils.addEventListener("click", () => {
-  appareilsSearchInput.value = ""; // Efface le contenu du champ de recherche
-  toggleClearIconForAppareils(); // Cache la croix
-  searchRecipes(recipes); // Mettez à jour les recettes affichées selon les filtres actuels
+  appareilsSearchInput.value = "";
+  toggleClearIconForAppareils();
+  updateList(); // Mettez à jour l'affichage des recettes en fonction du champ de recherche nettoyé
 });
+
+// Supposons que vous ayez déjà une liste de recettes initialisée quelque part
+renderAppareils(recipes); // Initialisez l'affichage des appareils basé sur les recettes initiales
