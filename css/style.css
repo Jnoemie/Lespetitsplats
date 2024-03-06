@@ -365,7 +365,7 @@ header h1 {
   font-weight: 500;
   font-size: 15px;
   text-transform: uppercase;
-  margin: 12px 0;
+  margin: 10px 0;
 }
 .recipe-description {
   height: 133px;
@@ -373,6 +373,7 @@ header h1 {
   font-size: 16px;
   overflow: hidden;
   font-family: "Manrope";
+  text-overflow: ellipsis;
 }
 .recipe-titleIngredients {
   display: grid;
@@ -448,4 +449,17 @@ ul {
 }
 .hidden {
   display: none;
+}
+
+.ingredients_item.selected {
+  pointer-events: none;
+  opacity: 0.8;
+}
+.ustensil_item.selected {
+  pointer-events: none;
+  opacity: 0.8;
+}
+.appareil_item.selected {
+  pointer-events: none;
+  opacity: 0.8;
 }

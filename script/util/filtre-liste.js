@@ -16,17 +16,11 @@ function initializeFiltering(ingredientInput, ustensilInput, appareilInput) {
 
   function filterList(containerId, query) {
     const container = document.getElementById(containerId);
-    const items = container.getElementsByTagName("LI");
+    const items = Array.from(container.getElementsByTagName("LI")); // Convertir en tableau pour utiliser forEach
 
-    for (let i = 0; i < items.length; i++) {
-      const item = items[i];
+    items.forEach((item) => {
       const itemName = item.textContent.toLowerCase();
-
-      if (itemName.includes(query)) {
-        item.style.display = "block";
-      } else {
-        item.style.display = "none";
-      }
-    }
+      item.style.display = itemName.includes(query) ? "block" : "none";
+    });
   }
 }

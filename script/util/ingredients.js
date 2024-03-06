@@ -1,100 +1,112 @@
-// Fonction pour traiter les ingrédients
-function renderIngredients(dataRecette) {
-  const ingredientsList = document.getElementById("container_ingredients");
-  let ingredients = [];
+let selectedIngredients = []; // Tableau pour garder la trace des ingrédients sélectionnés
 
-  for (let i = 0; i < dataRecette.length; i++) {
-    const recipe = dataRecette[i];
-    for (let j = 0; j < recipe.ingredients.length; j++) {
-      const ingr = recipe.ingredients[j];
-      if (!ingredients.includes(ingr.ingredient)) {
-        ingredients.push(ingr.ingredient);
-        const li = document.createElement("LI");
-        li.classList.add("ingredients_item");
-        li.textContent = ingr.ingredient;
-        ingredientsList.appendChild(li);
-
-        li.addEventListener("click", function (event) {
-          const ingredient = event.target.innerText;
-          if (!isTagExistIngredient(ingredient)) {
-            updateList("ingredients", ingredient);
-            addIngredientTag(ingredient);
-          }
-        });
-      }
-    }
-  }
-}
-
-// Vérifie si le tag (ingredient) existe déjà dans le conteneur de tags.
+// Fonction pour vérifier si un tag (ingrédient) existe déjà dans le conteneur de tags
 function isTagExistIngredient(ingredient) {
-  // Vérifiez si le tag existe déjà dans le conteneur de tags
   const tagContainer = document.getElementById("tags_container");
   const existingTags = tagContainer.querySelectorAll(".tag");
-
-  for (let i = 0; i < existingTags.length; i++) {
-    const existingTag = existingTags[i];
-    if (existingTag.textContent === ingredient) {
-      // Le tag existe déjà
-      return true;
-    }
-  }
-  return false;
+  return Array.from(existingTags).some((tag) => tag.textContent === ingredient);
 }
 
-function addIngredientTag(ingredient) {
-  const tagContainer = document.getElementById("tags_container");
-
-  // Créez un élément de tag
-  const tag = document.createElement("div");
-  tag.classList.add("tag"); // Ajoutez des classes CSS au tag si nécessaire
-
-  // Texte du tag
-  const tagText = document.createElement("span");
-  tagText.textContent = ingredient;
-  tag.appendChild(tagText);
-
-  // Bouton de suppression du tag
-  const deleteButton = document.createElement("button");
-  deleteButton.textContent = "X";
-  deleteButton.addEventListener("click", function () {
-    // Supprimer le tag du DOM
-    tagContainer.removeChild(tag);
-    // Supprimer l'ingrédient du tableau search_ingredients
-    const index = search_ingredients.indexOf(ingredient);
-
-    if (index !== -1) {
-      search_ingredients.splice(index, 1);
-      searchRecipes(recipes);
+// Fonction pour ajouter un écouteur d'événements à un élément LI
+function addClickListenerToIngredientLi(li) {
+  li.addEventListener("click", (event) => {
+    const ingredient = event.target.getAttribute("data-ingredient");
+    if (!isTagExistIngredient(ingredient)) {
+      addIngredientTag(ingredient);
+      updateList("ingredients", ingredient); // Mise à jour de l'affichage des recettes en fonction des ingrédients sélectionnés
     }
   });
-  tag.appendChild(deleteButton);
-
-  // Ajoutez le tag à votre conteneur de tags
-  tagContainer.appendChild(tag);
-  const ingredientsList = document.getElementById("container_ingredients");
-  const li = document.createElement("LI");
-  li.classList.add("ingredients_item");
-  li.textContent = ingredient;
-  ingredientsList.insertBefore(li, ingredientsList.firstChild);
 }
+
+// Fonction pour traiter et afficher les ingrédients
+function renderIngredients(recipes) {
+  const ingredientsList = document.getElementById("container_ingredients");
+  ingredientsList.innerHTML = ""; // Nettoie la liste avant de la remplir
+  let ingredients = [];
+
+  recipes.forEach((recipe) => {
+    recipe.ingredients.forEach((ingr) => {
+      if (!ingredients.includes(ingr.ingredient)) {
+        ingredients.push(ingr.ingredient);
+      }
+    });
+  });
+
+  // Trie les ingrédients pour mettre ceux sélectionnés en haut
+  ingredients.sort((a, b) =>
+    selectedIngredients.includes(a)
+      ? -1
+      : selectedIngredients.includes(b)
+      ? 1
+      : 0
+  );
+
+  ingredients.forEach((ingredient) => {
+    const li = document.createElement("LI");
+    li.classList.add("ingredients_item");
+    li.setAttribute("data-ingredient", ingredient);
+    li.textContent = ingredient;
+    if (!selectedIngredients.includes(ingredient)) {
+      addClickListenerToIngredientLi(li);
+    } else {
+      li.classList.add("selected");
+    }
+    ingredientsList.appendChild(li);
+  });
+}
+
+// Fonction pour ajouter un ingrédient en tant que tag et le marquer comme sélectionné
+function addIngredientTag(ingredient) {
+  if (!isTagExistIngredient(ingredient)) {
+    const tagContainer = document.getElementById("tags_container");
+    const tag = document.createElement("div");
+    tag.classList.add("tag");
+    const tagText = document.createElement("span");
+    tagText.textContent = ingredient;
+    tag.appendChild(tagText);
+
+    const deleteButton = document.createElement("button");
+    deleteButton.textContent = "X";
+    deleteButton.addEventListener("click", function () {
+      tagContainer.removeChild(tag);
+
+      const index = selectedIngredients.indexOf(ingredient);
+
+      if (index !== -1) {
+        selectedIngredients.splice(index, 1);
+      }
+
+      const indexSearch = search_ingredients.indexOf(ingredient);
+      if (indexSearch !== -1) {
+        search_ingredients.splice(indexSearch, 1);
+        searchRecipes(recipes); // Réactualiser l'affichage des recettes et des ingrédients
+      }
+    });
+    tag.appendChild(deleteButton);
+    tagContainer.appendChild(tag);
+    selectedIngredients.push(ingredient);
+  }
+}
+
+// Fonctions pour le champ de recherche et le bouton d'effacement
 const ingredientsSearchInput = document.getElementById("ingredients_search");
-const clearIconIngredients = ingredientsSearchInput.nextElementSibling; // Présumant que la croix est juste après l'input dans le DOM
+const clearIconIngredients = ingredientsSearchInput.nextElementSibling;
 
 function toggleClearIconForIngredients() {
-  if (ingredientsSearchInput.value) {
-    clearIconIngredients.classList.remove("hidden");
-  } else {
-    clearIconIngredients.classList.add("hidden");
-  }
+  clearIconIngredients.classList.toggle(
+    "hidden",
+    !ingredientsSearchInput.value
+  );
 }
 
 ingredientsSearchInput.addEventListener("input", toggleClearIconForIngredients);
 
 clearIconIngredients.addEventListener("click", () => {
-  ingredientsSearchInput.value = ""; // Efface le contenu du champ de recherche
-  toggleClearIconForIngredients(); // Cache la croix
-  // Réinitialisez votre recherche d'ingrédients ici et mettez à jour l'affichage
-  
-  searchRecipes(recipes); // Mettez à jour les recettes affichées selon les filtres actuels
+  ingredientsSearchInput.value = "";
+  toggleClearIconForIngredients();
+  updateList(); 
+  searchRecipes(recipes);
 });
+
+// Initialisez votre application en rendant les ingrédients basés sur les recettes initiales
+renderIngredients(recipes);

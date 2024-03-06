@@ -19,12 +19,11 @@ function toggleDropdown(type) {
   }
 }
 // Attachez cette fonction aux éléments .dropdown_btn
-const dropdownBtns = document.querySelectorAll(".dropdown_btn");
-for (let i = 0; i < dropdownBtns.length; i++) {
-  dropdownBtns[i].addEventListener("click", function (event) {
-    let type = "ingredients"; // 'let' parce que cette valeur peut changer
+document.querySelectorAll(".dropdown_btn").forEach((elt) =>
+  elt.addEventListener("click", function (event) {
+    let type = "ingredients";
     if (event.target.classList.contains("btn_appareils")) type = "appareils";
     if (event.target.classList.contains("btn_ustensils")) type = "ustensils";
     toggleDropdown(type);
-  });
-}
+  })
+);
